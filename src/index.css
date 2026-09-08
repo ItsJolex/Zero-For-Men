@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-black: #0A0A0A;
+  --color-brand-white: #FAFAFA;
+  --color-brand-brown: #8B5A2B;
+  --color-brand-brown-light: #A0522D;
+  --color-brand-brown-dark: #5C4033;
+  --color-brand-gray-light: #F3F4F6;
+  --color-brand-gray: #9CA3AF;
+  --color-brand-gray-dark: #374151;
+  --color-surface-container: #111827;
+  --color-surface-card: #1F2937;
+  --color-surface-card-hover: #374151;
+  --font-serif: "Bodoni Moda", "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Space Grotesk", monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brand-white);
+    color: var(--color-brand-black);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+.font-tech {
+  font-family: var(--font-mono);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, #111827 0%, #5C4033 50%, #8B5A2B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-border-glow {
+  border-color: rgba(139, 90, 43, 0.4);
+  box-shadow: 0 0 25px rgba(139, 90, 43, 0.15);
+}
+
+.brand-glow {
+  box-shadow: 0 0 30px rgba(139, 90, 43, 0.2);
+}
+
+.glass-nav {
+  background: rgba(250, 250, 250, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(156, 163, 175, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-gray-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-gray);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-brown);
+}
