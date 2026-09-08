@@ -57,12 +57,12 @@ export const Footer = () => {
               </li>
               <li>
                 <a href="#testimonios" className="hover:text-[#8B5A2B] transition-colors">
-                  Prueba Social & Envíos
+                  Despachos & Envíos
                 </a>
               </li>
               <li>
                 <a href="#fundadores" className="hover:text-[#8B5A2B] transition-colors">
-                  Sobre los Fundadores
+                  Nuestra Historia
                 </a>
               </li>
               <li>
@@ -140,7 +140,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-gray-600 text-[11px]">
           <div>
-            © {new Date().getFullYear()} Zero For Men. Marca Registrada. Creado por Jota Rodríguez & Valeria Vallera en Anzoátegui, Venezuela.
+            © {new Date().getFullYear()} Zero For Men. Marca Registrada. Anzoátegui, Venezuela.
           </div>
           <div className="flex items-center gap-4">
             <span className="text-gray-600">Hecho con pasión por la alta relojería</span>

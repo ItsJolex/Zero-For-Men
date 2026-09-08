@@ -17,7 +17,7 @@ export const Navbar = () => {
     { name: 'Colección', href: '#catalogo' },
     { name: 'Kit Zero', href: '#kit-zero' },
     { name: 'Ventas al Mayor', href: '#mayoristas' },
-    { name: 'Reseñas & Envíos', href: '#testimonios' },
+    { name: 'Envíos & Entregas', href: '#testimonios' },
     { name: 'Historia', href: '#fundadores' },
     { name: 'FAQ', href: '#faq' },
   ];

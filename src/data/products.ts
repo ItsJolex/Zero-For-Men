@@ -299,36 +299,6 @@ export const KIT_ITEMS = [
   }
 ];
 
-export const REVIEWS = [
-  {
-    id: 1,
-    author: 'Carlos Mendoza',
-    city: 'Lechería, Anzoátegui',
-    rating: 5,
-    text: 'Compré el Poedagar 930 Cara Blanca y la presencia que tiene en la mano es brutal. La entrega en Lechería fue rapidísima.',
-    product: 'Poedagar 930 Cara Blanca',
-    verified: true
-  },
-  {
-    id: 2,
-    author: 'Gabriel Arismendi',
-    city: 'Caracas, Dto. Capital',
-    rating: 5,
-    text: 'El Nibosi Aquanaut superó mis expectativas por completo. Se ve de un reloj de más de 200$. El envío por MRW llegó en 24 horas exactas.',
-    product: 'Nibosi Aquanaut (Homenaje al Patek)',
-    verified: true
-  },
-  {
-    id: 3,
-    author: 'Vanessa R.',
-    city: 'San Fernando, Apure',
-    rating: 5,
-    text: 'Encargué el Poedagar Dama Rose Gold y es hermoso. Llegó en perfectas condiciones con todo su kit.',
-    product: 'Poedagar Dama Rose Gold',
-    verified: true
-  }
-];
-
 export const FAQS = [
   {
     question: '¿Cuáles son los métodos de pago aceptados?',

@@ -19,7 +19,7 @@ export const WholesaleSection = () => {
     },
     {
       title: 'Asesoría Directa de Venta',
-      description: 'Jota & Valeria te orientan sobre cuáles son los modelos de más rápida rotación y mayor rentabilidad según tu ciudad o nicho de mercado.',
+      description: 'Te orientamos directamente sobre cuáles son los modelos de más rápida rotación y mayor rentabilidad según tu ciudad o nicho de mercado.',
       icon: Users
     }
   ];

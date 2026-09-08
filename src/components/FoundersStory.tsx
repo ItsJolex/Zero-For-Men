@@ -19,22 +19,22 @@ export const FoundersStory = () => {
               <div className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] bg-[#FFFFFF] p-3 shadow-2xl">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#FAFAFA]">
                   <img
-                    src="/assets/feed/02_reloj_lecheria.jpg"
-                    alt="Jota Rodríguez y Valeria Vallera, fundadores de Zero For Men en Anzoátegui"
-                    className="w-full h-full object-cover object-top"
+                    src="/assets/feed/11_curren_8445_cronografo.jpg"
+                    alt="Inspección técnica de relojería en taller Zero For Men"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
                   
                   {/* Photo details overlay */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E5E7EB] shadow-md">
                     <div className="text-xs uppercase font-mono text-[#8B5A2B] tracking-widest mb-0.5 font-semibold">
-                      Fundadores de Zero For Men
+                      Control de Calidad & Taller
                     </div>
                     <div className="text-base font-bold text-[#0A0A0A]">
-                      Jota Rodríguez & Valeria Vallera
+                      Inspección Técnica Pieza por Pieza
                     </div>
                     <div className="text-xs text-gray-600 mt-1">
-                      Emprendimiento nacido en el estado Anzoátegui para toda Venezuela 🇻🇪
+                      Relojería de precisión con sello y garantía Zero en Anzoátegui 🇻🇪
                     </div>
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export const FoundersStory = () => {
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFFFFF] border border-[#8B5A2B]/40 text-[#8B5A2B] text-xs font-mono tracking-widest uppercase mb-6">
               <Heart className="w-3.5 h-3.5" />
-              <span>Nuestra Historia & Propósito</span>
+              <span>Nuestra Filosofía & Propósito</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0A] tracking-tight mb-6">
@@ -84,7 +84,7 @@ export const FoundersStory = () => {
               </a>
 
               <a
-                href="https://wa.me/584141934573?text=Hola%20Jota%20y%20Valeria,%20me%20encant%C3%B3%20su%20historia%20en%20la%20tienda%20web"
+                href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20me%20encant%C3%B3%20su%20propuesta%20en%20la%20tienda%20web"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider transition-all hover:scale-105 shadow-sm"

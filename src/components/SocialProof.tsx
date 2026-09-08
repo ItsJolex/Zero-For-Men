@@ -1,5 +1,4 @@
-import { REVIEWS } from '../data/products';
-import { Star, MapPin, Truck, CheckCircle2, Heart } from 'lucide-react';
+import { MapPin, Truck, Heart } from 'lucide-react';
 
 export const SocialProof = () => {
   return (
@@ -21,7 +20,7 @@ export const SocialProof = () => {
         </div>
 
         {/* Real Visual Proof Collage */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: MRW Dispatch Photo */}
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
@@ -92,45 +91,6 @@ export const SocialProof = () => {
             </div>
           </div>
 
-        </div>
-
-        {/* Customer Testimonial Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {REVIEWS.map((review) => (
-            <div
-              key={review.id}
-              className="p-6 rounded-2xl bg-[#FFFFFF] border border-[#E5E7EB] flex flex-col justify-between hover:border-[#8B5A2B]/40 transition-colors shadow-sm"
-            >
-              <div>
-                {/* 5-Stars rating */}
-                <div className="flex items-center gap-1 mb-3 text-[#8B5A2B]">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-
-                <p className="text-xs sm:text-sm text-gray-700 italic mb-4 leading-relaxed">
-                  "{review.text}"
-                </p>
-              </div>
-
-              <div className="border-t border-[#E5E7EB] pt-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#0A0A0A]">{review.author}</span>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400">
-                    <CheckCircle2 className="w-3 h-3" /> Verificado
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 text-[11px] text-gray-600 mt-0.5">
-                  <MapPin className="w-3 h-3" />
-                  <span>{review.city}</span>
-                </div>
-                <div className="text-[10px] text-[#8B5A2B] font-mono mt-1">
-                  {review.product}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
 
       </div>
