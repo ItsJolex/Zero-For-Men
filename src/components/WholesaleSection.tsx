@@ -76,29 +76,37 @@ export const WholesaleSection = () => {
         </div>
 
         {/* Featured Wholesale Box Offer */}
-        <div className="rounded-3xl bg-gradient-to-br from-[#FFFFFF] via-[#161B23] to-[#FAFAFA] border border-[#8B5A2B]/40 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <div className="rounded-3xl bg-gradient-to-br from-[#FFFFFF] via-[#FAF6F0] to-[#F5EFEB] border border-[#8B5A2B]/30 p-7 sm:p-12 shadow-xl relative overflow-hidden">
+          {/* Ambient Warm Glows & Top Accent */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#8B5A2B]/20 via-[#8B5A2B] to-[#8B5A2B]/20" />
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#8B5A2B]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#C6A02A]/10 rounded-full blur-3xl pointer-events-none" />
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-1.5 text-xs uppercase font-mono tracking-widest text-[#8B5A2B] mb-2">
-                <ShieldCheck className="w-4 h-4" /> Stock 100% Disponible en Anzoátegui
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B5A2B]/10 border border-[#8B5A2B]/25 text-[11px] sm:text-xs font-mono tracking-wider uppercase text-[#8B5A2B] mb-4 font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#8B5A2B] shrink-0" />
+                <span>Stock 100% Disponible en Anzoátegui</span>
               </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0A0A0A] mb-4">
-                Solicita Hoy Nuestro Catálogo Mayorista y Lista de Precios
+              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0A0A] tracking-tight mb-4 leading-tight">
+                Solicita Hoy Nuestro <span className="text-[#8B5A2B]">Catálogo Mayorista</span> y Lista de Precios
               </h3>
-              <p className="text-sm text-gray-700 leading-relaxed mb-6 max-w-2xl">
-                Te enviamos por WhatsApp el PDF interactivo con el stock en tiempo real, descuentos por volumen (3, 6, 12 y 24 piezas) y el calculador de margen sugerido para tu zona.
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-6 max-w-2xl font-normal">
+                Te enviamos por WhatsApp el PDF interactivo con el stock en tiempo real, descuentos por volumen (desde 3, 6, 12 y 24 piezas) y el calculador de margen sugerido para tu zona.
               </p>
 
-              <div className="flex flex-wrap gap-4 text-xs text-gray-700">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" /> Despacho en 24h a cualquier agencia MRW
+              <div className="flex flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm font-medium text-gray-800">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#FFFFFF]/90 border border-[#E5E7EB] shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                  <span>Despacho en 24h a cualquier agencia MRW</span>
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" /> Pagos en Bs (BCV), Zelle y USDT
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#FFFFFF]/90 border border-[#E5E7EB] shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                  <span>Pagos en Bs (BCV), Zelle y USDT</span>
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" /> Garantía de cambio por defectos
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#FFFFFF]/90 border border-[#E5E7EB] shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                  <span>Garantía de cambio por defectos</span>
                 </span>
               </div>
             </div>
@@ -108,13 +116,13 @@ export const WholesaleSection = () => {
                 href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20solicito%20el%20cat%C3%A1logo%20y%20lista%20de%20precios%20al%20mayor%20para%20revendedores"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#8B5A2B] via-[#E5BE3B] to-[#C6A02A] hover:scale-105 text-[#FAFAFA] font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.3)] w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#8B5A2B] via-[#9E6735] to-[#704214] hover:from-[#704214] hover:to-[#5C4033] text-[#FAFAFA] font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-[#8B5A2B]/25 hover:shadow-xl hover:scale-105 w-full sm:w-auto"
               >
-                <MessageCircle className="w-5 h-5 fill-current" />
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
                 <span>Pedir Catálogo Mayorista</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 shrink-0" />
               </a>
-              <span className="block text-[11px] text-gray-600 mt-2">
+              <span className="block text-xs text-gray-500 mt-2.5 font-medium">
                 Respuesta en menos de 15 minutos en horario comercial
               </span>
             </div>
