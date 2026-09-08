@@ -27,12 +27,12 @@ export const SocialProof = () => {
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
             <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
               <img
-                src="/assets/feed/06_despacho_envios.jpg"
-                alt="Despachos de pedidos en MRW Nueva Barcelona para toda Venezuela"
+                src="/assets/feed/07_nibosi_aquanaut_lujo.jpg"
+                alt="Despachos de pedidos en agencia MRW Nueva Barcelona para toda Venezuela"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-emerald-400 border border-emerald-500/40">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-emerald-600 border border-emerald-500/40 font-semibold">
                 MRW • Zoom • Tealca
               </div>
             </div>
@@ -41,7 +41,7 @@ export const SocialProof = () => {
                 Despachos Diarios Protegidos
               </h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Fotografía real en agencia de envíos. Cada paquete viaja con precinto de seguridad, plástico de burbuja reforzado y número de guía enviado al instante.
+                Fotografía real en agencia MRW Nueva Barcelona. Cada paquete viaja con precinto de seguridad, empaque reforzado y número de guía enviado al instante.
               </p>
             </div>
           </div>
@@ -51,11 +51,11 @@ export const SocialProof = () => {
             <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
               <img
                 src="/assets/feed/04_detalle_ramo_poedagar930.jpg"
-                alt="Detalle especial para novia en Apure con reloj Poedagar 930 y flores"
+                alt="Detalle especial para cliente en Apure con reloj Poedagar 930 y flores"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-rose-400 border border-rose-500/40 flex items-center gap-1">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-rose-500 border border-rose-500/40 flex items-center gap-1 font-semibold">
                 <Heart className="w-3 h-3 fill-current" /> Historia en Apure
               </div>
             </div>
@@ -64,7 +64,7 @@ export const SocialProof = () => {
                 Cómplices de Fechas Especiales
               </h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Coordinamos entregas sorpresa en cualquier rincón del país. Desde ramos con relojes camuflados hasta regalos de aniversario con notas personalizadas.
+                Coordinamos entregas sorpresa en cualquier rincón del país. Desde arreglos con relojes de colección hasta regalos de aniversario con notas personalizadas.
               </p>
             </div>
           </div>
@@ -73,12 +73,12 @@ export const SocialProof = () => {
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
             <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
               <img
-                src="/assets/feed/02_reloj_lecheria.jpg"
-                alt="Entrega personal en Lechería y zona norte de Anzoátegui"
+                src="/assets/feed/10_pagani_design_1706_gmt.jpg"
+                alt="Entrega personal de relojes en Lechería y zona norte de Anzoátegui"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-cyan-400 border border-cyan-500/40 flex items-center gap-1">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-cyan-600 border border-cyan-500/40 flex items-center gap-1 font-semibold">
                 <MapPin className="w-3 h-3" /> Entregas en Lechería
               </div>
             </div>

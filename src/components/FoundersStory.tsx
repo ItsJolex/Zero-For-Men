@@ -19,15 +19,15 @@ export const FoundersStory = () => {
               <div className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] bg-[#FFFFFF] p-3 shadow-2xl">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#FAFAFA]">
                   <img
-                    src="/assets/feed/03_fundadores_zero.jpg"
+                    src="/assets/feed/02_reloj_lecheria.jpg"
                     alt="Jota Rodríguez y Valeria Vallera, fundadores de Zero For Men en Anzoátegui"
                     className="w-full h-full object-cover object-top"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-transparent to-transparent opacity-85" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
                   
                   {/* Photo details overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#FAFAFA]/90 backdrop-blur-md border border-[#E5E7EB]">
-                    <div className="text-xs uppercase font-mono text-[#8B5A2B] tracking-widest mb-0.5">
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E5E7EB] shadow-md">
+                    <div className="text-xs uppercase font-mono text-[#8B5A2B] tracking-widest mb-0.5 font-semibold">
                       Fundadores de Zero For Men
                     </div>
                     <div className="text-base font-bold text-[#0A0A0A]">
@@ -77,7 +77,7 @@ export const FoundersStory = () => {
                 href="https://instagram.com/zerooformen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#8B5A2B] text-xs font-semibold text-gray-200 hover:text-[#0A0A0A] transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#8B5A2B] text-xs font-semibold text-gray-700 hover:text-[#0A0A0A] transition-all shadow-sm"
               >
                 <InstagramIcon className="w-4 h-4 text-[#8B5A2B]" />
                 <span>@zerooformen (Instagram)</span>
@@ -87,7 +87,7 @@ export const FoundersStory = () => {
                 href="https://wa.me/584141934573?text=Hola%20Jota%20y%20Valeria,%20me%20encant%C3%B3%20su%20historia%20en%20la%20tienda%20web"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider transition-all hover:scale-105 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
                 <span>Conversar con Nosotros</span>

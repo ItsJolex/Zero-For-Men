@@ -111,8 +111,8 @@ export function App() {
       {/* Luxury Footer */}
       <Footer />
 
-      {/* Floating Interactive WhatsApp Widget */}
-      <WhatsAppFloating />
+      {/* Floating Interactive WhatsApp Widget (hidden when modal is open) */}
+      {!selectedProduct && <WhatsAppFloating />}
 
       {/* Global Product Sheet Modal with Direct Link URL & High Z-Index */}
       <ProductModal

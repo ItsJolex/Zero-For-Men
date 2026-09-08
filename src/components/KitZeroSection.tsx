@@ -96,14 +96,14 @@ export const KitZeroSection = () => {
               {/* Image Collage / Main Visual */}
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#FAFAFA] mb-6">
                 <img
-                  src="/assets/feed/01_coleccion_al_mayor.jpg"
-                  alt="Colección Kit Zero con estuche y accesorios"
+                  src="/assets/feed/03_fundadores_zero.jpg"
+                  alt="Colección Kit Zero con estuche rígido y accesorios"
                   className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-transparent to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
 
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#FAFAFA]/90 backdrop-blur-md border border-[#E5E7EB]">
-                  <div className="text-xs font-mono text-[#8B5A2B] uppercase tracking-wider mb-1">
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E5E7EB] shadow-sm">
+                  <div className="text-xs font-mono text-[#8B5A2B] uppercase tracking-wider mb-1 font-semibold">
                     Cero Gastos Adicionales
                   </div>
                   <div className="text-sm font-semibold text-[#0A0A0A]">
@@ -138,7 +138,7 @@ export const KitZeroSection = () => {
                   href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quisiera%20pedir%20un%20reloj%20con%20el%20Kit%20Zero%20completo"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#8B5A2B] hover:bg-[#E5BE3B] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all shadow-md"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all shadow-md"
                 >
                   <span>Pedir Reloj con Kit Zero Incluido</span>
                   <ArrowRight className="w-4 h-4" />

@@ -92,7 +92,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-3xl bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh] sm:max-h-[90vh] my-auto z-10">
+      <div className="relative w-full max-w-3xl bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[90vh] my-auto z-10">
         {/* Header - Fixed at top of modal */}
         <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-[#E5E7EB] bg-[#FAFAFA]">
           <div className="flex items-center gap-2">
@@ -107,7 +107,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
             {/* Quick Copy Link in Header */}
             <button
               onClick={handleCopyLink}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 copied
                   ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
                   : 'bg-[#FFFFFF] text-gray-700 border border-gray-300 hover:border-[#8B5A2B] hover:text-[#8B5A2B]'
@@ -127,10 +127,10 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
               )}
             </button>
 
-            {/* Close Button */}
+            {/* Close Button with comfortable touch target */}
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-gray-500 hover:text-[#0A0A0A] hover:bg-gray-200 transition-colors"
+              className="p-2 rounded-lg text-gray-500 hover:text-[#0A0A0A] hover:bg-gray-200 transition-colors cursor-pointer"
               aria-label="Cerrar ventana"
             >
               <X className="w-5 h-5" />
@@ -138,8 +138,8 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
           </div>
         </div>
 
-        {/* Scrollable Content */}
-        <div className="overflow-y-auto p-4 sm:p-8 space-y-6 flex-1">
+        {/* Scrollable Content with comfortable bottom padding */}
+        <div className="overflow-y-auto p-4 sm:p-8 pb-10 sm:pb-12 space-y-6 flex-1">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             {/* Image Container */}
             <div className="relative rounded-xl overflow-hidden bg-[#FAFAFA] border border-[#E5E7EB] aspect-square shadow-inner">

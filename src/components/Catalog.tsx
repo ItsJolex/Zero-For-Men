@@ -65,14 +65,14 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
         </div>
 
         {/* Filters and Search Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-10">
           {/* Categories Pill Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none flex-nowrap lg:flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
+                className={`whitespace-nowrap px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 ${
                   selectedCategory === cat.id
                     ? 'bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] text-[#FAFAFA] font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)]'
                     : 'bg-[#FFFFFF] text-gray-700 border border-[#E5E7EB] hover:border-[#8B5A2B]/50 hover:text-[#0A0A0A]'
@@ -84,7 +84,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
           </div>
 
           {/* Search Box */}
-          <div className="relative w-full md:w-72">
+          <div className="relative w-full lg:w-72 shrink-0">
             <input
               type="text"
               value={searchQuery}
@@ -111,7 +111,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {filteredProducts.map((product) => {
               const whatsappMessage = encodeURIComponent(
                 `Hola Zero For Men, deseo consultar disponibilidad del modelo ${product.name}`
@@ -126,7 +126,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                   {/* Image Container with Badges */}
                   <div
                     onClick={() => handleOpenProduct(product)}
-                    className="relative h-72 sm:h-80 overflow-hidden bg-[#FAFAFA] cursor-pointer"
+                    className="relative h-56 sm:h-80 overflow-hidden bg-[#FAFAFA] cursor-pointer"
                   >
                     <img
                       src={product.image}
@@ -157,9 +157,9 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                   </div>
 
                   {/* Body Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-baseline justify-between gap-2 mb-2">
+                      <div className="flex items-baseline justify-between gap-2 mb-1.5">
                         <h3
                           onClick={() => handleOpenProduct(product)}
                           className="font-serif text-lg sm:text-xl font-bold text-[#0A0A0A] group-hover:text-[#8B5A2B] transition-colors leading-tight cursor-pointer"
@@ -168,12 +168,12 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                         </h3>
                       </div>
 
-                      <p className="text-xs text-gray-600 mb-4 line-clamp-2">
+                      <p className="text-xs text-gray-600 mb-3 sm:mb-4 line-clamp-2">
                         {product.tagline}
                       </p>
 
-                      {/* Top 3 Specs List */}
-                      <ul className="space-y-1.5 mb-6 text-xs text-gray-700 border-t border-[#E5E7EB] pt-3">
+                      {/* Top 3 Specs List - Hidden on mobile to prevent infinite vertical fatigue */}
+                      <ul className="hidden sm:block space-y-1.5 mb-6 text-xs text-gray-700 border-t border-[#E5E7EB] pt-3">
                         {product.specs.slice(0, 3).map((spec, i) => (
                           <li key={i} className="flex items-center gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#8B5A2B] shrink-0" />
@@ -185,7 +185,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
 
                     {/* Price and CTA Buttons */}
                     <div>
-                      <div className="flex items-baseline justify-between border-t border-[#E5E7EB] pt-4 mb-4">
+                      <div className="flex items-baseline justify-between border-t border-[#E5E7EB] pt-3 sm:pt-4 mb-3 sm:mb-4">
                         <div>
                           <span className="text-xs text-gray-600 block font-mono">Precio Oficial</span>
                           <span className="text-2xl font-bold text-[#0A0A0A]">{product.price}</span>
@@ -200,7 +200,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => handleOpenProduct(product)}
-                          className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#FAFAFA] border border-gray-300 hover:border-[#8B5A2B] text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
+                          className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:py-2.5 rounded-xl bg-[#FAFAFA] border border-gray-300 hover:border-[#8B5A2B] text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
                         >
                           <Info className="w-3.5 h-3.5 text-[#8B5A2B]" />
                           <span>Ficha Técnica</span>
@@ -210,7 +210,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                           href={whatsappUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FFFFFF] font-bold text-xs uppercase tracking-wider px-3 py-2.5 rounded-xl transition-all shadow-sm hover:scale-[1.02]"
+                          className="inline-flex items-center justify-center gap-1.5 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FFFFFF] font-bold text-xs uppercase tracking-wider px-3 py-3 sm:py-2.5 rounded-xl transition-all shadow-sm hover:scale-[1.02]"
                         >
                           <MessageCircle className="w-3.5 h-3.5 fill-current" />
                           <span>Pedir Ahora</span>
@@ -233,7 +233,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
         )}
 
         {/* Wholesale callout banner beneath catalog */}
-        <div className="mt-16 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#FFFFFF] via-[#1A202A] to-[#FFFFFF] border border-[#8B5A2B]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="mt-16 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#FFFFFF] via-[#FAFAFA] to-[#FFFFFF] border border-[#8B5A2B]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="text-center sm:text-left">
             <span className="inline-block text-xs uppercase font-mono tracking-widest text-[#8B5A2B] mb-1">
               ¿Deseas emprender en tu ciudad?
@@ -247,7 +247,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
           </div>
           <a
             href="#mayoristas"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#8B5A2B] hover:bg-[#E5BE3B] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all"
           >
             <span>Ver Beneficios Mayoristas</span>
             <ChevronRight className="w-4 h-4" />

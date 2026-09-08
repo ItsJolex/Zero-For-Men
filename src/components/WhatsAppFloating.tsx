@@ -26,10 +26,10 @@ export const WhatsAppFloating = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end">
       {/* Popover Bubble */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-88 bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl shadow-2xl overflow-hidden animate-fadeIn">
+        <div className="mb-3 w-[calc(100vw-2rem)] max-w-xs sm:max-w-sm sm:w-88 bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl shadow-2xl overflow-hidden animate-fadeIn">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#FAFAFA] to-[#FFFFFF] p-4 border-b border-[#E5E7EB] flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -45,8 +45,8 @@ export const WhatsAppFloating = () => {
                 <span className="font-serif text-sm font-bold text-[#0A0A0A] block">
                   Zero For Men
                 </span>
-                <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[10px] text-emerald-600 font-mono flex items-center gap-1 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Asesor Activo en WhatsApp
                 </span>
               </div>
@@ -54,7 +54,7 @@ export const WhatsAppFloating = () => {
 
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 text-gray-600 hover:text-[#0A0A0A] rounded-lg transition-colors"
+              className="p-1 text-gray-500 hover:text-[#0A0A0A] rounded-lg transition-colors cursor-pointer"
               aria-label="Cerrar chat"
             >
               <X className="w-4 h-4" />
@@ -72,9 +72,9 @@ export const WhatsAppFloating = () => {
                 <button
                   key={i}
                   onClick={() => handleSend(prompt.text)}
-                  className="w-full text-left p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-[#1A202A] border border-[#E5E7EB] hover:border-[#8B5A2B]/60 text-xs text-[#0A0A0A] transition-all duration-200 flex items-center justify-between group cursor-pointer"
+                  className="w-full text-left p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-gray-50 border border-[#E5E7EB] hover:border-[#8B5A2B]/60 text-xs text-[#0A0A0A] transition-all duration-200 flex items-center justify-between group cursor-pointer shadow-sm"
                 >
-                  <span className="truncate pr-2">{prompt.label}</span>
+                  <span className="truncate pr-2 font-medium">{prompt.label}</span>
                   <Send className="w-3.5 h-3.5 text-[#8B5A2B] group-hover:translate-x-0.5 transition-transform shrink-0" />
                 </button>
               ))}
@@ -97,13 +97,13 @@ export const WhatsAppFloating = () => {
       {/* Main Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative group p-4 rounded-full bg-[#25D366] text-white hover:bg-[#20bd5a] shadow-[0_4px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-110 flex items-center justify-center cursor-pointer"
+        className="relative group p-3.5 sm:p-4 rounded-full bg-[#25D366] text-white hover:bg-[#20bd5a] shadow-[0_4px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-105 flex items-center justify-center cursor-pointer"
         aria-label="Abrir WhatsApp"
       >
         {/* Pulsing ring */}
         <span className="absolute -inset-1 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
         
-        <MessageCircle className="w-7 h-7 fill-current relative z-10" />
+        <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-current relative z-10" />
 
         {/* Desktop floating tooltip when closed */}
         {!isOpen && (

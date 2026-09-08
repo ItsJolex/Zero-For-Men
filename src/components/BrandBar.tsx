@@ -13,11 +13,11 @@ export const BrandBar = () => {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6 items-stretch">
           {BRANDS.map((b) => (
             <div
               key={b.name}
-              className="p-4 rounded-xl bg-[#FFFFFF]/60 border border-[#E5E7EB] hover:border-[#8B5A2B]/50 transition-all duration-300 group text-center flex flex-col items-center justify-center hover:-translate-y-1 shadow-sm hover:shadow-[0_4px_20px_rgba(212,175,55,0.1)]"
+              className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#8B5A2B]/50 transition-all duration-300 group text-center flex flex-col items-center justify-center hover:-translate-y-1 shadow-sm hover:shadow-[0_4px_20px_rgba(212,175,55,0.1)] last:col-span-2 sm:last:col-span-1"
             >
               <div className="flex items-center gap-1.5 mb-1">
                 <span className="font-serif text-lg font-bold text-[#0A0A0A] group-hover:text-[#8B5A2B] transition-colors tracking-wide">
