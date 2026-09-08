@@ -87,6 +87,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
           <div className="relative w-full lg:w-72 shrink-0">
             <input
               type="text"
+              aria-label="Buscar reloj por marca, modelo o estilo"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar por marca, modelo o zafiro..."

@@ -20,7 +20,8 @@ interface ProductModalProps {
 }
 
 export const ProductModal = ({ product, onClose }: ProductModalProps) => {
-  const [copied, setCopied] = useState(false);
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const isCopied = Boolean(product && copiedSlug === product.slug);
 
   // Close on ESC key and lock body scroll
   useEffect(() => {
@@ -42,11 +43,6 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
     };
   }, [product, onClose]);
 
-  // Reset copied state when product changes
-  useEffect(() => {
-    setCopied(false);
-  }, [product]);
-
   if (!product) return null;
 
   const currentUrl =
@@ -57,8 +53,8 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(currentUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setCopiedSlug(product.slug);
+      setTimeout(() => setCopiedSlug(null), 2500);
     } catch {
       // Fallback
       const textArea = document.createElement('textarea');
@@ -67,8 +63,8 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setCopiedSlug(product.slug);
+      setTimeout(() => setCopiedSlug(null), 2500);
     }
   };
 
@@ -108,13 +104,13 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
             <button
               onClick={handleCopyLink}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                copied
+                isCopied
                   ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
                   : 'bg-[#FFFFFF] text-gray-700 border border-gray-300 hover:border-[#8B5A2B] hover:text-[#8B5A2B]'
               }`}
               title="Copiar enlace directo de este modelo"
             >
-              {copied ? (
+              {isCopied ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-600" />
                   <span className="font-semibold">¡Enlace copiado!</span>

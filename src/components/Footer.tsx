@@ -1,9 +1,13 @@
-import { MessageCircle, MapPin, Truck } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { InstagramIcon } from './InstagramIcon';
 
-export const Footer = () => {
+interface FooterProps {
+  onOpenLegal?: (tab: 'terminos' | 'privacidad' | 'garantia') => void;
+}
+
+export const Footer = ({ onOpenLegal }: FooterProps) => {
   return (
-    <footer className="bg-[#FAFAFA] border-t border-[#E5E7EB] pt-16 pb-12 text-gray-600 text-xs">
+    <footer className="bg-[#FFFFFF] border-t border-[#E5E7EB] pt-16 pb-12 text-gray-600 text-xs relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Grid */}
@@ -11,16 +15,12 @@ export const Footer = () => {
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#8B5A2B]/70 shadow-md">
-                <img
-                  src="/assets/linktree_avatar.jpeg"
-                  alt="Zero For Men"
-                  className="w-full h-full object-cover"
-                />
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-[#8B5A2B] flex items-center justify-center text-[#FAFAFA] font-serif font-bold text-sm">
+                0
               </div>
-              <span className="font-serif text-2xl font-bold text-[#0A0A0A] tracking-tight">
-                ZERO <span className="text-[#8B5A2B] font-light">FOR MEN</span>
+              <span className="font-serif text-lg font-bold tracking-wider text-[#0A0A0A]">
+                ZERO FOR MEN
               </span>
             </div>
 
@@ -28,9 +28,8 @@ export const Footer = () => {
               Boutique de relojería de precisión, homenajes de alta gama y accesorios de presencia masculina. Cada pieza se entrega con el Kit Zero completo e inspección técnica previa.
             </p>
 
-            <div className="flex items-center gap-2 text-xs text-gray-700">
-              <MapPin className="w-4 h-4 text-[#8B5A2B]" />
-              <span>Lechería, Barcelona & Puerto La Cruz • Envíos a toda Venezuela</span>
+            <div className="pt-2 text-gray-600">
+              <span className="text-[#8B5A2B] font-semibold">Ubicación:</span> Lechería, Estado Anzoátegui, Venezuela 🇻🇪
             </div>
           </div>
 
@@ -97,19 +96,49 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Channels & Contact */}
+          {/* Social Channels & Legal */}
           <div>
             <h4 className="font-serif text-sm font-bold text-[#0A0A0A] uppercase tracking-wider mb-4">
+              Políticas & Soporte
+            </h4>
+            <ul className="space-y-2.5 text-gray-700 mb-6">
+              <li>
+                <button
+                  onClick={() => onOpenLegal?.('garantia')}
+                  className="hover:text-[#8B5A2B] transition-colors text-left cursor-pointer"
+                >
+                  Garantías & Envíos
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onOpenLegal?.('terminos')}
+                  className="hover:text-[#8B5A2B] transition-colors text-left cursor-pointer"
+                >
+                  Términos del Servicio
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onOpenLegal?.('privacidad')}
+                  className="hover:text-[#8B5A2B] transition-colors text-left cursor-pointer"
+                >
+                  Política de Privacidad
+                </button>
+              </li>
+            </ul>
+
+            <h4 className="font-serif text-xs font-bold text-[#0A0A0A] uppercase tracking-wider mb-2">
               Canales Oficiales
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <a
                 href="https://instagram.com/zerooformen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-gray-700 hover:text-[#8B5A2B] transition-colors"
+                className="flex items-center gap-2 text-gray-700 hover:text-[#8B5A2B] transition-colors"
               >
-                <InstagramIcon className="w-4 h-4 text-[#8B5A2B]" />
+                <InstagramIcon className="w-3.5 h-3.5 text-[#8B5A2B]" />
                 <span>@zerooformen</span>
               </a>
 
@@ -117,21 +146,11 @@ export const Footer = () => {
                 href="https://wa.me/584141934573"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-gray-700 hover:text-[#8B5A2B] transition-colors"
+                className="flex items-center gap-2 text-gray-700 hover:text-[#8B5A2B] transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                 <span>+58 414-1934573</span>
               </a>
-
-              <div className="pt-2">
-                <span className="block text-[11px] text-gray-500 uppercase tracking-widest font-mono mb-1">
-                  Agencias Aliadas
-                </span>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Truck className="w-3.5 h-3.5 text-[#8B5A2B]" />
-                  <span>MRW • Zoom • Tealca</span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -140,7 +159,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-gray-600 text-[11px]">
           <div>
-            © {new Date().getFullYear()} Zero For Men. Marca Registrada. Anzoátegui, Venezuela.
+            © {new Date().getFullYear()} Zero For Men. Todos los derechos reservados. Anzoátegui, Venezuela.
           </div>
           <div className="flex items-center gap-4">
             <span className="text-gray-600">Hecho con pasión por la alta relojería</span>

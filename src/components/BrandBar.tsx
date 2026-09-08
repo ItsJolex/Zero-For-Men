@@ -9,7 +9,7 @@ export const BrandBar = () => {
             Marcas & Fabricantes Seleccionados
           </span>
           <span className="text-xs text-gray-600">
-            Piezas originales con garantía oficial e inspección directa en taller
+            Piezas de alta calidad con garantía por defectos e inspección directa en taller
           </span>
         </div>
 

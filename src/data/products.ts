@@ -96,6 +96,25 @@ export const PRODUCTS: Product[] = [
     slug: 'pablo-raez-tank-marron',
   },
   {
+    id: 'pablo-raez-tank-rosegold',
+    name: 'Pablo Raez Tank Rose Gold',
+    brand: 'Pablo Raez',
+    tagline: 'Elegancia geométrica en tono oro rosa.',
+    description: 'Caja rectangular con fino acabado oro rosa, esfera minimalista de alta legibilidad y correa de cuero. Incluye caja protectora y envío gratuito a toda Venezuela.',
+    image: '/assets/catalog/pablo-raez-tank-rosegold.webp',
+    category: 'elegantes',
+    price: '$30',
+    priceNote: 'Tasa BCV',
+    specs: ['Bisel Rose Gold', 'Estilo Tank Geométrico', 'Resistencia 5 ATM'],
+    badges: ['Elegancia Pura', 'Envío Gratis'],
+    movement: 'Cuarzo de Precisión',
+    caseMaterial: 'Acero Inoxidable Rose Gold',
+    waterResistance: '5 ATM',
+    glassType: 'Cristal Mineral Endurecido',
+    isPopular: false,
+    slug: 'pablo-raez-tank-rosegold',
+  },
+  {
     id: 'pablo-raez-classic-redondo',
     name: 'Pablo Raez Classic Redondo',
     brand: 'Pablo Raez',
@@ -283,8 +302,8 @@ export const KIT_ITEMS = [
     icon: 'Package'
   },
   {
-    title: 'Garantía Oficial',
-    description: 'Certificado físico que respalda la autenticidad y el funcionamiento mecánico de tu reloj.',
+    title: 'Garantía por Defectos',
+    description: 'Tarjeta física que respalda la autenticidad y el óptimo funcionamiento de tu reloj contra defectos de fabricación.',
     icon: 'ShieldCheck'
   },
   {

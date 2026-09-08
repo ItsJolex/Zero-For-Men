@@ -21,7 +21,7 @@ export const WhatsAppFloating = () => {
 
   const handleSend = (text: string) => {
     const url = `https://wa.me/584141934573?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   };
 

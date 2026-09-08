@@ -55,7 +55,7 @@ export const FoundersStory = () => {
 
             <div className="space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
               <p>
-                Zero For Men nació de una necesidad clara: en Venezuela resultaba sumamente difícil encontrar relojería de estatus y presencia que equilibrara <strong className="text-[#0A0A0A]">precisión mecánica, materiales nobles y un precio justo</strong>, sin descuidar la experiencia del cliente.
+                Zero For Men nació de una necesidad clara: en Venezuela resultaba sumamente difícil encontrar relojería de estatus y presencia que equilibrara <strong className="text-[#0A0A0A]">ingeniería de precisión, materiales nobles y un precio justo</strong>, sin descuidar la experiencia del cliente.
               </p>
 
               <p>
@@ -63,7 +63,7 @@ export const FoundersStory = () => {
               </p>
 
               <p>
-                Diseñamos la <strong className="text-[#8B5A2B]">Experiencia Kit Zero</strong>: cada pieza que sale de nuestro taller en Anzoátegui va protegida en estuche rígido, probada en hermeticidad, con ajustador de eslabones y su certificado de garantía por escrito.
+                Diseñamos la <strong className="text-[#8B5A2B]">Experiencia Kit Zero</strong>: cada pieza que sale de nuestro taller en Anzoátegui va protegida en estuche rígido, probada en hermeticidad, con ajustador de eslabones y tarjeta de garantía por defectos de fábrica.
               </p>
 
               <p className="text-gray-600 text-sm">
