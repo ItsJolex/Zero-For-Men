@@ -67,7 +67,7 @@ for (const product of PRODUCTS) {
   );
   html = html.replace(
     /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/?>/i,
-    `<meta property="og:image" content="${imageUrl}" />\n    <meta property="og:image:secure_url" content="${imageUrl}" />`
+    `<meta property="og:image" content="${imageUrl}" />\n    <meta property="og:image:secure_url" content="${imageUrl}" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="600" />\n    <meta property="og:image:height" content="600" />`
   );
 
   // Replace Twitter Card Tags
