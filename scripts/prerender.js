@@ -124,4 +124,27 @@ for (const product of PRODUCTS) {
   console.log(`  ✓ Generado HTML estático para: /${product.slug}`);
 }
 
-console.log(`\n✨ Pre-renderizado SSG completado exitosamente para los ${PRODUCTS.length} productos.\n`);
+// Generación dinámica de sitemap.xml con el dominio activo
+let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Pagina Principal -->
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+`;
+
+for (const product of PRODUCTS) {
+  sitemapContent += `  <url>
+    <loc>${SITE_URL}/${product.slug}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n`;
+}
+sitemapContent += `</urlset>\n`;
+
+fs.writeFileSync(path.resolve(distDir, 'sitemap.xml'), sitemapContent, 'utf-8');
+console.log(`  ✓ Sitemap dinámico generado en dist/sitemap.xml con dominio: ${SITE_URL}`);
+
+console.log(`\n✨ Pre-renderizado SSG y Sitemap completados exitosamente para los ${PRODUCTS.length} productos.\n`);
