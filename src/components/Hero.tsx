@@ -34,10 +34,10 @@ export const Hero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
               <a
                 href="#catalogo"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#8B5A2B] via-[#E5BE3B] to-[#C6A02A] text-[#FAFAFA] font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_35px_rgba(212,175,55,0.5)] hover:scale-[1.02] transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#6F441F] via-[#8B5A2B] to-[#7B4B22] hover:from-[#5C3818] hover:via-[#7A4E24] hover:to-[#6A3F1D] text-[#FAFAFA] font-semibold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-xl border border-[#A0522D]/40 shadow-[0_10px_25px_-5px_rgba(139,90,43,0.35)] hover:shadow-[0_15px_30px_-5px_rgba(139,90,43,0.45)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
               >
                 <span>Explorar Colección</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
 
               <a

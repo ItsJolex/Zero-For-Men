@@ -79,7 +79,7 @@ export const FaqSection = () => {
             href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20tengo%20una%20pregunta%20sobre%20un%20reloj"
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#8B5A2B] hover:bg-[#E5BE3B] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all shadow-sm hover:scale-[1.02]"
           >
             <MessageCircle className="w-4 h-4 fill-current" />
             <span>Consultar por WhatsApp</span>
