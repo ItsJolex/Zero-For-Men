@@ -1,6 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { imageSize as _imageSize } from 'image-size';
+
+// Helper: image-size en ESM espera un Buffer, no un path string
+function getImageDims(filePath) {
+  const buffer = fs.readFileSync(filePath);
+  return _imageSize(new Uint8Array(buffer));
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,9 +33,11 @@ const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 // Actualizar dist/index.html raíz con el dominio activo y etiquetas OG completas
 let rootHtml = template.replaceAll('https://zeroformen.com', SITE_URL);
+const avatarPath = path.resolve(rootDir, 'public/assets/linktree_avatar.jpeg');
+const avatarDims = fs.existsSync(avatarPath) ? getImageDims(avatarPath) : { width: 512, height: 512 };
 rootHtml = rootHtml.replace(
   /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/?>/i,
-  `<meta property="og:image" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:secure_url" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="600" />\n    <meta property="og:image:height" content="600" />`
+  `<meta property="og:image" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:secure_url" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="${avatarDims.width}" />\n    <meta property="og:image:height" content="${avatarDims.height}" />`
 );
 fs.writeFileSync(indexHtmlPath, rootHtml, 'utf-8');
 console.log(`  ✓ Actualizado dist/index.html con dominio activo: ${SITE_URL}`);
@@ -38,6 +47,10 @@ for (const product of PRODUCTS) {
   const imageUrl = product.image.startsWith('http')
     ? product.image.replace(/\.webp$/, '.jpg')
     : `${SITE_URL}${product.image.replace(/\.webp$/, '.jpg')}`;
+  
+  // Leer dimensiones reales de la imagen JPG
+  const localJpgPath = path.resolve(rootDir, 'public', product.image.replace(/^\//, '').replace(/\.webp$/, '.jpg'));
+  const imgDims = fs.existsSync(localJpgPath) ? getImageDims(localJpgPath) : { width: 600, height: 800 };
   
   const title = `${product.name} - ${product.price} | Zero For Men Venezuela`;
   const rawDescription = `${product.tagline} ${product.description}`.replace(/"/g, '&quot;');
@@ -76,7 +89,7 @@ for (const product of PRODUCTS) {
   );
   html = html.replace(
     /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/?>/i,
-    `<meta property="og:image" content="${imageUrl}" />\n    <meta property="og:image:secure_url" content="${imageUrl}" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="600" />\n    <meta property="og:image:height" content="600" />`
+    `<meta property="og:image" content="${imageUrl}" />\n    <meta property="og:image:secure_url" content="${imageUrl}" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="${imgDims.width}" />\n    <meta property="og:image:height" content="${imgDims.height}" />`
   );
 
   // Replace Twitter Card Tags

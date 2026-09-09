@@ -1,81 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Este archivo es un placeholder.
+  El sitemap.xml real se genera dinámicamente durante `npm run build`
+  por el script scripts/prerender.js con el dominio de producción activo.
+  El archivo final se escribe en dist/sitemap.xml.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Pagina Principal -->
   <url>
     <loc>https://zero-for-men.vercel.app/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-
-  <!-- Relojes Coleccion Activa -->
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-930-cara-blanca</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-930-cara-verde-esmeralda</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-date-day-bisel-dorado</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-tank-marron</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-tank-rosegold</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-classic-redondo</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-milanese-acero</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/nibosi-aquanaut-oro-rosa-chocolate</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/nibosi-aquanaut-correa-negra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-dama-oro-rosa</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-dama-cara-roja</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/poedagar-dama-rose-gold</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-classic-marron</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zero-for-men.vercel.app/pablo-raez-classic-negro</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
 </urlset>
