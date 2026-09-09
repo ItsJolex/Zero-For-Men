@@ -27,8 +27,8 @@ const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 for (const product of PRODUCTS) {
   const productUrl = `${SITE_URL}/${product.slug}`;
   const imageUrl = product.image.startsWith('http')
-    ? product.image
-    : `${SITE_URL}${product.image}`;
+    ? product.image.replace(/\.webp$/, '.jpg')
+    : `${SITE_URL}${product.image.replace(/\.webp$/, '.jpg')}`;
   
   const title = `${product.name} - ${product.price} | Zero For Men Venezuela`;
   const rawDescription = `${product.tagline} ${product.description}`.replace(/"/g, '&quot;');
