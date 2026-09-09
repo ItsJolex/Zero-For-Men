@@ -24,6 +24,15 @@ const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://zeroformen.com');
 
+// Actualizar dist/index.html raíz con el dominio activo y etiquetas OG completas
+let rootHtml = template.replaceAll('https://zeroformen.com', SITE_URL);
+rootHtml = rootHtml.replace(
+  /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/?>/i,
+  `<meta property="og:image" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:secure_url" content="${SITE_URL}/assets/linktree_avatar.jpeg" />\n    <meta property="og:image:type" content="image/jpeg" />\n    <meta property="og:image:width" content="600" />\n    <meta property="og:image:height" content="600" />`
+);
+fs.writeFileSync(indexHtmlPath, rootHtml, 'utf-8');
+console.log(`  ✓ Actualizado dist/index.html con dominio activo: ${SITE_URL}`);
+
 for (const product of PRODUCTS) {
   const productUrl = `${SITE_URL}/${product.slug}`;
   const imageUrl = product.image.startsWith('http')
