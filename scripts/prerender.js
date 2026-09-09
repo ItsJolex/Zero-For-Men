@@ -20,7 +20,9 @@ const { PRODUCTS } = await import('../src/data/products.ts');
 
 console.log(`\n🚀 Iniciando pre-renderizado SSG para ${PRODUCTS.length} productos...`);
 
-const SITE_URL = 'https://zeroformen.com';
+const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL 
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://zeroformen.com');
 
 for (const product of PRODUCTS) {
   const productUrl = `${SITE_URL}/${product.slug}`;
