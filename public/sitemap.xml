@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Pagina Principal -->
   <url>
     <loc>https://zeroformen.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Relojes Coleccion Activa -->
   <url>
-    <loc>https://zeroformen.com/poedagar-930-verde-esmeralda</loc>
+    <loc>https://zeroformen.com/poedagar-930-cara-blanca</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/poedagar-930-blanco-silver</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroformen.com/poedagar-930-negro-obsidiana</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroformen.com/poedagar-930-azul-zafiro</loc>
+    <loc>https://zeroformen.com/poedagar-930-cara-verde-esmeralda</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -51,42 +44,27 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/pagani-design-1706-gmt</loc>
+    <loc>https://zeroformen.com/nibosi-aquanaut-oro-rosa-chocolate</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/pagani-design-1661-submariner</loc>
+    <loc>https://zeroformen.com/nibosi-aquanaut-correa-negra</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/curren-8445-cronografo</loc>
+    <loc>https://zeroformen.com/poedagar-dama-oro-rosa</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/curren-8329-cuero-marron</loc>
+    <loc>https://zeroformen.com/poedagar-dama-cara-roja</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zeroformen.com/poedagar-dama-rosegold-diamantes</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroformen.com/poedagar-dama-silver-esmeralda</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroformen.com/nibosi-aquanaut-lujo</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zeroformen.com/nibosi-chronograph-black</loc>
+    <loc>https://zeroformen.com/poedagar-dama-rose-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

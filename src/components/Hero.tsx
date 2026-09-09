@@ -16,7 +16,7 @@ export const Hero = () => {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFFFF] border border-[#8B5A2B]/40 text-[#8B5A2B] text-xs font-mono tracking-widest uppercase mb-6 shadow-sm">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Colección Oficial • Anzoátegui, Venezuela</span>
+              <span>Relojería Masculina • Lechería &amp; Envíos a Toda Venezuela</span>
             </div>
 
             {/* Main Headline */}
@@ -27,7 +27,7 @@ export const Hero = () => {
 
             {/* Subheading */}
             <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal mb-8">
-              Mecánica de alto nivel, acero inoxidable 316L y acabados de lujo diseñados para el hombre que proyecta éxito y elegancia. Cada pieza incluye el exclusivo <strong className="text-[#8B5A2B] font-semibold">Kit Zero de Regalo</strong> listo para usar o emprender.
+              Boutique especializada en relojes de hombre en Venezuela. Acabados premium, maquinaria de precisión y modelos en acero inoxidable (Poedagar, Nibosi, Pablo Raez y más). Cada pieza incluye el exclusivo <strong className="text-[#8B5A2B] font-semibold">Kit Zero de Regalo</strong>, entregas personales en Lechería y envíos rápidos a todo el país.
             </p>
 
             {/* Action Buttons */}

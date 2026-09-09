@@ -320,20 +320,28 @@ export const KIT_ITEMS = [
 
 export const FAQS = [
   {
-    question: '¿Cuáles son los métodos de pago aceptados?',
-    answer: 'Aceptamos Pago Móvil en Bolívares a tasa BCV, Efectivo, Zelle, y USDT vía Binance Pay.'
+    question: '¿Cuáles son los métodos de pago aceptados en Venezuela?',
+    answer: 'Aceptamos Pago Móvil en Bolívares a tasa oficial BCV del día, Efectivo en divisas, Zelle, y criptomonedas (USDT) vía Binance Pay.'
   },
   {
     question: '¿Hacen envíos a todo el país y cuánto tardan?',
-    answer: 'Sí, despachamos a toda Venezuela a través de MRW (¡Envío GRATIS en la mayoría de los modelos!). Los envíos suelen tardar entre 24 y 48 horas hábiles.'
+    answer: 'Sí, despachamos a toda Venezuela a través de MRW (¡Envío GRATIS en la mayoría de los modelos!). Los envíos a ciudades como Caracas, Valencia, Maracaibo, Barquisimeto y Puerto Ordaz tardan entre 24 y 48 horas hábiles.'
   },
   {
     question: '¿Dónde realizan entregas personales?',
-    answer: 'Realizamos entregas personales en Lechería, Anzoátegui.'
+    answer: 'Realizamos entregas personales inmediatas en Lechería, Puerto La Cruz y Barcelona (estado Anzoátegui).'
   },
   {
-    question: '¿Qué incluye la compra de mi reloj?',
-    answer: 'Todos los relojes incluyen su caja original, pañuelo de microfibra, y en los modelos de acero incluimos el recortador (ajustador de eslabones).'
+    question: '¿Qué incluye la compra de mi reloj con el Kit Zero?',
+    answer: 'Todos nuestros relojes incluyen su caja o estuche original de colección, paño de microfibra antiestático, garantía contra defectos y, en modelos de correa de acero, la herramienta ajustadora de eslabones.'
+  },
+  {
+    question: '¿Cómo comprar relojes para hombre originales en Venezuela de forma segura?',
+    answer: 'En Zero For Men garantizamos piezas 100% funcionales y revisadas. Antes de cada despacho te enviamos fotos y videos de tu reloj probado por WhatsApp con tu guía de rastreo MRW.'
+  },
+  {
+    question: '¿Cómo comprar relojes al mayor para emprender en Venezuela?',
+    answer: 'Contamos con planes mayoristas desde 5 unidades con márgenes de ganancia del 50% al 80%. Te entregamos catálogo con precios especiales, material publicitario para tus estados/redes y asesoría de modelos con mayor rotación.'
   }
 ];
 

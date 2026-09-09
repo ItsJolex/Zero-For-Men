@@ -43,6 +43,70 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
     };
   }, [product, onClose]);
 
+  // Dynamic SEO Title, Description and JSON-LD when product is active
+  useEffect(() => {
+    if (!product) return;
+
+    const originalTitle = document.title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const originalDesc = metaDesc ? metaDesc.getAttribute('content') : '';
+
+    // Update document title for SEO & browser tabs
+    document.title = `${product.name} - ${product.price} | Zero For Men Venezuela`;
+
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        'content',
+        `${product.name} (${product.brand}) en Zero For Men Venezuela. ${product.tagline} Precio: ${product.price}. Incluye Kit Zero y envíos a todo el país.`
+      );
+    }
+
+    // Dynamic Product Schema.org
+    const scriptId = 'jsonld-active-product';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+
+    const numericPrice = product.price.replace(/[^0-9.]/g, '');
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: product.name,
+      image: product.image.startsWith('http') ? product.image : `https://zeroformen.com${product.image}`,
+      description: `${product.tagline} ${product.description}`,
+      brand: {
+        '@type': 'Brand',
+        name: product.brand
+      },
+      offers: {
+        '@type': 'Offer',
+        price: numericPrice || '35',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        url: `https://zeroformen.com/${product.slug}`,
+        seller: {
+          '@type': 'Organization',
+          name: 'Zero For Men'
+        }
+      }
+    });
+
+    return () => {
+      document.title = originalTitle;
+      if (metaDesc && originalDesc) {
+        metaDesc.setAttribute('content', originalDesc);
+      }
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [product]);
+
   if (!product) return null;
 
   const currentUrl =

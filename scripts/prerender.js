@@ -1,0 +1,125 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+const distDir = path.resolve(rootDir, 'dist');
+const indexHtmlPath = path.resolve(distDir, 'index.html');
+
+if (!fs.existsSync(indexHtmlPath)) {
+  console.error('Error: dist/index.html does not exist. Run vite build first.');
+  process.exit(1);
+}
+
+const template = fs.readFileSync(indexHtmlPath, 'utf-8');
+
+// Import products dynamically using Node's native ESM and TS support
+const { PRODUCTS } = await import('../src/data/products.ts');
+
+console.log(`\n🚀 Iniciando pre-renderizado SSG para ${PRODUCTS.length} productos...`);
+
+const SITE_URL = 'https://zeroformen.com';
+
+for (const product of PRODUCTS) {
+  const productUrl = `${SITE_URL}/${product.slug}`;
+  const imageUrl = product.image.startsWith('http')
+    ? product.image
+    : `${SITE_URL}${product.image}`;
+  
+  const title = `${product.name} - ${product.price} | Zero For Men Venezuela`;
+  const rawDescription = `${product.tagline} ${product.description}`.replace(/"/g, '&quot;');
+  const cleanDesc = rawDescription.length > 155 ? `${rawDescription.slice(0, 152)}...` : rawDescription;
+  const numericPrice = product.price.replace(/[^0-9.]/g, '') || '35';
+
+  let html = template;
+
+  // Replace Title
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
+
+  // Replace Meta Description
+  html = html.replace(
+    /<meta\s+name="description"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta name="description" content="${cleanDesc}" />`
+  );
+
+  // Replace Canonical Link
+  html = html.replace(
+    /<link\s+rel="canonical"\s+href="[\s\S]*?"\s*\/?>/i,
+    `<link rel="canonical" href="${productUrl}" />`
+  );
+
+  // Replace Open Graph Tags
+  html = html.replace(
+    /<meta\s+property="og:url"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta property="og:url" content="${productUrl}" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:title"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta property="og:title" content="${product.name} - ${product.price} | Zero For Men" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:description"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta property="og:description" content="${cleanDesc}" />`
+  );
+  html = html.replace(
+    /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta property="og:image" content="${imageUrl}" />\n    <meta property="og:image:secure_url" content="${imageUrl}" />`
+  );
+
+  // Replace Twitter Card Tags
+  html = html.replace(
+    /<meta\s+name="twitter:title"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta name="twitter:title" content="${product.name} - ${product.price} | Zero For Men" />`
+  );
+  html = html.replace(
+    /<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta name="twitter:description" content="${cleanDesc}" />`
+  );
+  html = html.replace(
+    /<meta\s+name="twitter:image"\s+content="[\s\S]*?"\s*\/?>/i,
+    `<meta name="twitter:image" content="${imageUrl}" />`
+  );
+
+  // Inyectar Schema Product individual especifico para crawlers
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    'name': product.name,
+    'image': imageUrl,
+    'description': cleanDesc,
+    'brand': {
+      '@type': 'Brand',
+      'name': product.brand
+    },
+    'offers': {
+      '@type': 'Offer',
+      'price': numericPrice,
+      'priceCurrency': 'USD',
+      'availability': 'https://schema.org/InStock',
+      'url': productUrl,
+      'seller': {
+        '@type': 'Organization',
+        'name': 'Zero For Men'
+      }
+    }
+  };
+
+  const schemaTag = `<script type="application/ld+json">\n${JSON.stringify(productSchema, null, 2)}\n</script>\n</head>`;
+  html = html.replace('</head>', schemaTag);
+
+  // Output to dist/[slug]/index.html
+  const productDir = path.resolve(distDir, product.slug);
+  if (!fs.existsSync(productDir)) {
+    fs.mkdirSync(productDir, { recursive: true });
+  }
+  fs.writeFileSync(path.resolve(productDir, 'index.html'), html, 'utf-8');
+
+  // Also write dist/[slug].html for servers that match route.html
+  fs.writeFileSync(path.resolve(distDir, `${product.slug}.html`), html, 'utf-8');
+
+  console.log(`  ✓ Generado HTML estático para: /${product.slug}`);
+}
+
+console.log(`\n✨ Pre-renderizado SSG completado exitosamente para los ${PRODUCTS.length} productos.\n`);
