@@ -19,8 +19,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Admin secret not configured' });
   }
 
-  if (hashedPin !== adminSecret) {
-    return res.status(401).json({ error: 'Invalid PIN' });
+  if (hashedPin !== adminSecret && pin !== adminSecret) {
+    return res.status(401).json({ error: 'PIN inválido' });
   }
 
   const token = createHash('sha256')
