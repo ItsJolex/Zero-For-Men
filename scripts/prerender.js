@@ -42,6 +42,15 @@ rootHtml = rootHtml.replace(
 fs.writeFileSync(indexHtmlPath, rootHtml, 'utf-8');
 console.log(`  ✓ Actualizado dist/index.html con dominio activo: ${SITE_URL}`);
 
+// Generar página estática para /admin para que Vercel la sirva directamente sin 404
+const adminDir = path.resolve(distDir, 'admin');
+if (!fs.existsSync(adminDir)) {
+  fs.mkdirSync(adminDir, { recursive: true });
+}
+fs.writeFileSync(path.resolve(adminDir, 'index.html'), rootHtml, 'utf-8');
+fs.writeFileSync(path.resolve(distDir, 'admin.html'), rootHtml, 'utf-8');
+console.log('  ✓ Generado HTML estático para: /admin');
+
 for (const product of PRODUCTS) {
   const productUrl = `${SITE_URL}/${product.slug}`;
   const imageUrl = product.image.startsWith('http')
