@@ -28,14 +28,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Product ID is required' });
   }
 
-  const allowedFields = ['name', 'brand', 'price', 'numeric_price', 'price_note', 'tagline', 'description', 'image', 'category', 'in_stock', 'featured'];
+  const allowedFields = [
+    'name', 'brand', 'price', 'numeric_price', 'compare_at_price', 
+    'numeric_compare_at_price', 'discount_percent', 'price_note', 'tagline', 
+    'description', 'image', 'category', 'in_stock', 'featured',
+    'movement', 'case_material', 'water_resistance', 'glass_type', 'specs', 'badges'
+  ];
+  
   const updates: string[] = [];
   const values: unknown[] = [];
 
   for (const [key, value] of Object.entries(fields)) {
     if (allowedFields.includes(key)) {
-      updates.push(`${key} = ?`);
-      values.push(value);
+      // Handle JSON fields
+      if (key === 'specs' || key === 'badges') {
+        updates.push(`${key} = ?`);
+        values.push(JSON.stringify(value));
+      } else {
+        updates.push(`${key} = ?`);
+        values.push(value);
+      }
     }
   }
 

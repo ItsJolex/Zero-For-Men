@@ -16,8 +16,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const db = getDb();
     const result = await db.execute('SELECT * FROM products ORDER BY created_at DESC');
+    
+    // Parse JSON fields
+    const products = result.rows.map(row => ({
+      ...row,
+      specs: row.specs ? JSON.parse(row.specs as string) : [],
+      badges: row.badges ? JSON.parse(row.badges as string) : []
+    }));
+    
     res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
-    return res.status(200).json({ products: result.rows });
+    return res.status(200).json({ products });
   } catch (error) {
     console.error('DB error:', error);
     return res.status(500).json({ error: 'Failed to fetch products' });
