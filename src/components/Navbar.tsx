@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { MessageCircle, Menu, X, MapPin, Truck, Sparkles, ChevronRight } from 'lucide-react';
+import { MessageCircle, Menu, X, MapPin, Truck, Sparkles, ChevronRight, ShoppingBag } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { totalItems, openDrawer } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,6 +102,18 @@ export const Navbar = () => {
 
           {/* Right Action CTA (Desktop) */}
           <div className="hidden sm:flex items-center gap-3">
+            <button
+              onClick={openDrawer}
+              className="relative p-2.5 rounded-xl border border-[#E5E7EB] text-gray-700 hover:border-[#8B5A2B] hover:text-[#8B5A2B] transition-colors cursor-pointer"
+              aria-label="Abrir carrito"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#8B5A2B] text-[#FAFAFA] text-[10px] font-bold">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <a
               href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quisiera%20consultar%20el%20cat%C3%A1logo%20disponible"
               target="_blank"
@@ -111,14 +125,28 @@ export const Navbar = () => {
             </a>
           </div>
 
-          {/* Mobile Menu Hamburger Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-800 hover:text-[#8B5A2B] focus:outline-none cursor-pointer rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label={mobileMenuOpen ? 'Cerrar Menú' : 'Abrir Menú'}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="flex lg:hidden items-center gap-2">
+            <button
+              onClick={openDrawer}
+              className="relative p-2 rounded-xl border border-[#E5E7EB] text-gray-700 hover:border-[#8B5A2B] hover:text-[#8B5A2B] transition-colors cursor-pointer"
+              aria-label="Abrir carrito"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#8B5A2B] text-[#FAFAFA] text-[10px] font-bold">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-gray-800 hover:text-[#8B5A2B] focus:outline-none cursor-pointer rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label={mobileMenuOpen ? 'Cerrar Menú' : 'Abrir Menú'}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Drawer - High Contrast and Auto-Close */}

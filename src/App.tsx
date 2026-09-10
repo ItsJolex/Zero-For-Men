@@ -12,6 +12,10 @@ import { Footer } from './components/Footer';
 import { WhatsAppFloating } from './components/WhatsAppFloating';
 import { ProductModal } from './components/ProductModal';
 import { LegalModal, type LegalTab } from './components/LegalModal';
+import { CartDrawer } from './components/CartDrawer';
+import { CartProvider } from './context/CartContext';
+import { AdminLogin } from './components/admin/AdminLogin';
+import { AdminDashboard } from './components/admin/AdminDashboard';
 import { findProductBySlugOrId, type Product } from './data/products';
 import { AlertCircle, X } from 'lucide-react';
 
@@ -23,6 +27,7 @@ const RESERVED_ROUTES = [
   'testimonios',
   'fundadores',
   'faq',
+  'admin',
   'index.html'
 ];
 
@@ -47,7 +52,17 @@ function parseUrlProduct(): { product: Product | null; notFound: string | null }
   return { product: null, notFound: null };
 }
 
+function AdminPanel() {
+  const [token, setToken] = useState<string | null>(() => sessionStorage.getItem('admin_token'));
+
+  if (!token) {
+    return <AdminLogin onLogin={setToken} />;
+  }
+  return <AdminDashboard token={token} onLogout={() => setToken(null)} />;
+}
+
 export function App() {
+  const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.replace(/^\/+|\/+$/g, '') === 'admin';
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(() => parseUrlProduct().product);
   const [notFoundSlug, setNotFoundSlug] = useState<string | null>(() => parseUrlProduct().notFound);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
@@ -83,7 +98,12 @@ export function App() {
     setLegalModalOpen(true);
   };
 
+  if (isAdminRoute) {
+    return <AdminPanel />;
+  }
+
   return (
+    <CartProvider>
     <div className="min-h-screen bg-[#FAFAFA] text-[#0A0A0A] flex flex-col selection:bg-[#8B5A2B] selection:text-[#FFFFFF]">
       {/* Top Announcement Banner & Glass Header */}
       <Navbar />
@@ -155,7 +175,11 @@ export function App() {
         initialTab={legalTab}
         onClose={() => setLegalModalOpen(false)}
       />
+
+      {/* Shopping Cart Drawer */}
+      <CartDrawer />
     </div>
+    </CartProvider>
   );
 }
 

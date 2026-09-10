@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { PRODUCTS, type Product } from '../data/products';
 import { ProductModal } from './ProductModal';
-import { MessageCircle, Info, Sparkles, Search, CheckCircle2, ChevronRight } from 'lucide-react';
+import { MessageCircle, Info, Sparkles, Search, CheckCircle2, ChevronRight, ShoppingCart } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { useBcvRate } from '../hooks/useBcvRate';
 
 interface CatalogProps {
   onSelectProduct?: (product: Product) => void;
@@ -11,6 +13,21 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [internalModalProduct, setInternalModalProduct] = useState<Product | null>(null);
+  const { addItem } = useCart();
+  const { rate: bcvRate, loading: bcvLoading, error: bcvError } = useBcvRate();
+
+  const formatVesPrice = (usdPrice: string): string | null => {
+    if (!bcvRate) return null;
+    
+    const numericPrice = parseFloat(usdPrice.replace(/[^0-9.]/g, ''));
+    if (isNaN(numericPrice)) return null;
+    
+    const vesAmount = numericPrice * bcvRate;
+    return `Bs. ${vesAmount.toLocaleString('es-VE', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
+  };
 
   const handleOpenProduct = (product: Product) => {
     if (onSelectProduct) {
@@ -190,6 +207,23 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                         <div>
                           <span className="text-xs text-gray-600 block font-mono">Precio Oficial</span>
                           <span className="text-2xl font-bold text-[#0A0A0A]">{product.price}</span>
+                          {bcvRate && (
+                            <div className="mt-1">
+                              <span className="text-xs text-gray-500">
+                                ≈ {formatVesPrice(product.price)}
+                              </span>
+                              {bcvLoading && (
+                                <span className="text-xs text-gray-400 ml-1">(actualizando...)</span>
+                              )}
+                            </div>
+                          )}
+                          {bcvError && (
+                            <div className="mt-1">
+                              <span className="text-[10px] text-amber-600">
+                                Tasa no disponible
+                              </span>
+                            </div>
+                          )}
                         </div>
                         {product.priceNote && (
                           <span className="text-[11px] text-[#8B5A2B] font-medium text-right max-w-[140px]">
@@ -198,23 +232,31 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-3 gap-2">
                         <button
                           onClick={() => handleOpenProduct(product)}
-                          className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:py-2.5 rounded-xl bg-[#FAFAFA] border border-gray-300 hover:border-[#8B5A2B] text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
+                          className="inline-flex items-center justify-center gap-1.5 px-2 py-3 sm:py-2.5 rounded-xl bg-[#FAFAFA] border border-gray-300 hover:border-[#8B5A2B] text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
                         >
                           <Info className="w-3.5 h-3.5 text-[#8B5A2B]" />
-                          <span>Ficha Técnica</span>
+                          <span className="hidden sm:inline">Ficha</span>
+                        </button>
+
+                        <button
+                          onClick={() => addItem(product)}
+                          className="inline-flex items-center justify-center gap-1.5 px-2 py-3 sm:py-2.5 rounded-xl bg-[#FAFAFA] border border-[#8B5A2B]/40 hover:border-[#8B5A2B] hover:bg-[#8B5A2B]/10 text-[#8B5A2B] text-xs font-semibold transition-colors cursor-pointer"
+                        >
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                          <span>Añadir</span>
                         </button>
 
                         <a
                           href={whatsappUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FFFFFF] font-bold text-xs uppercase tracking-wider px-3 py-3 sm:py-2.5 rounded-xl transition-all shadow-sm hover:scale-[1.02]"
+                          className="inline-flex items-center justify-center gap-1.5 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FFFFFF] font-bold text-xs uppercase tracking-wider px-2 py-3 sm:py-2.5 rounded-xl transition-all shadow-sm hover:scale-[1.02]"
                         >
                           <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                          <span>Pedir Ahora</span>
+                          <span>Pedir</span>
                         </a>
                       </div>
                     </div>

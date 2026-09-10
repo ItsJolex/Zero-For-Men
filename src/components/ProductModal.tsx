@@ -11,8 +11,11 @@ import {
   Layers,
   Sparkles,
   Link2,
-  Check
+  Check,
+  ShoppingCart
 } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { useBcvRate } from '../hooks/useBcvRate';
 
 interface ProductModalProps {
   product: Product | null;
@@ -22,6 +25,21 @@ interface ProductModalProps {
 export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const isCopied = Boolean(product && copiedSlug === product.slug);
+  const { addItem } = useCart();
+  const { rate: bcvRate, loading: bcvLoading, error: bcvError } = useBcvRate();
+
+  const formatVesPrice = (usdPrice: string): string | null => {
+    if (!bcvRate) return null;
+    
+    const numericPrice = parseFloat(usdPrice.replace(/[^0-9.]/g, ''));
+    if (isNaN(numericPrice)) return null;
+    
+    const vesAmount = numericPrice * bcvRate;
+    return `Bs. ${vesAmount.toLocaleString('es-VE', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
+  };
 
   // Close on ESC key and lock body scroll
   useEffect(() => {
@@ -234,6 +252,17 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
 
               <div className="flex items-baseline gap-2 py-2.5 border-y border-[#E5E7EB]">
                 <span className="text-3xl font-bold text-[#0A0A0A]">{product.price}</span>
+                {bcvRate && (
+                  <span className="text-sm text-gray-600">
+                    ≈ {formatVesPrice(product.price)}
+                  </span>
+                )}
+                {bcvLoading && (
+                  <span className="text-xs text-gray-500">(actualizando...)</span>
+                )}
+                {bcvError && (
+                  <span className="text-xs text-amber-600">Tasa no disponible</span>
+                )}
                 {product.priceNote && (
                   <span className="text-xs text-gray-600 font-mono">({product.priceNote})</span>
                 )}
@@ -318,6 +347,16 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
               className="px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 text-xs font-semibold transition-colors flex-1 sm:flex-none"
             >
               Cerrar
+            </button>
+
+            <button
+              onClick={() => {
+                if (product) addItem(product);
+              }}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#8B5A2B] text-[#8B5A2B] hover:bg-[#8B5A2B]/10 text-xs font-semibold transition-colors cursor-pointer flex-1 sm:flex-none"
+            >
+              <ShoppingCart className="w-4 h-4" />
+              <span>Añadir</span>
             </button>
 
             <a
