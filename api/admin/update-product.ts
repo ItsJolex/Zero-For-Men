@@ -31,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const allowedFields = [
     'name', 'brand', 'price', 'numeric_price', 'compare_at_price', 
     'numeric_compare_at_price', 'discount_percent', 'price_note', 'tagline', 
-    'description', 'image', 'category', 'in_stock', 'featured',
+    'description', 'image', 'category', 'in_stock', 'is_hidden', 'featured',
     'movement', 'case_material', 'water_resistance', 'glass_type', 'specs', 'badges'
   ];
   

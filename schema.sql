@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS products (
   image TEXT NOT NULL,
   category TEXT NOT NULL,
   in_stock BOOLEAN DEFAULT 1,
+  is_hidden BOOLEAN DEFAULT 0,
   featured BOOLEAN DEFAULT 0,
   movement TEXT,
   case_material TEXT,

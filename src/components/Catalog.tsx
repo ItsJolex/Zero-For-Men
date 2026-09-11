@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PRODUCTS, type Product } from '../data/products';
 import { ProductModal } from './ProductModal';
 import { MessageCircle, Info, Sparkles, Search, CheckCircle2, ChevronRight, ShoppingCart } from 'lucide-react';
@@ -10,8 +10,26 @@ interface CatalogProps {
 }
 
 export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    const hydrateCatalog = async () => {
+      try {
+        const res = await fetch('/api/products');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (Array.isArray(data.products) && data.products.length > 0) {
+          setProducts(data.products as Product[]);
+        }
+      } catch {
+        // Mantener PRODUCTS como fallback
+      }
+    };
+    hydrateCatalog();
+  }, []);
+
   const [internalModalProduct, setInternalModalProduct] = useState<Product | null>(null);
   const { addItem } = useCart();
   const { rate: bcvRate, loading: bcvLoading, error: bcvError } = useBcvRate();
@@ -47,7 +65,7 @@ export const Catalog: React.FC<CatalogProps> = ({ onSelectProduct }) => {
     { id: 'mayoristas', name: 'Al Mayor / Lote' },
   ];
 
-  const filteredProducts = PRODUCTS.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     const matchesCategory =
       selectedCategory === 'todos' || product.category === selectedCategory;
 

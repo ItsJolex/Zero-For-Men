@@ -15,16 +15,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const db = getDb();
-    const result = await db.execute('SELECT * FROM products ORDER BY created_at DESC');
+    const includeHidden = req.query.include_hidden === 'true';
     
-    // Parse JSON fields
+    // Si es para la tienda pública, no mostrar los ocultos
+    const sql = includeHidden 
+      ? 'SELECT * FROM products ORDER BY created_at DESC'
+      : 'SELECT * FROM products WHERE is_hidden = 0 OR is_hidden IS NULL ORDER BY created_at DESC';
+
+    const result = await db.execute(sql);
+    
     const products = result.rows.map(row => ({
       ...row,
       specs: row.specs ? JSON.parse(row.specs as string) : [],
       badges: row.badges ? JSON.parse(row.badges as string) : []
     }));
     
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+    // Si la petición es del admin (?include_hidden=true o con token), NUNCA cachear
+    if (includeHidden || req.headers.authorization) {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    } else {
+      res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate');
+    }
+
     return res.status(200).json({ products });
   } catch (error) {
     console.error('DB error:', error);

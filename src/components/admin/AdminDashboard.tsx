@@ -9,7 +9,8 @@ import {
   AlertCircle,
   Tag,
   DollarSign,
-  Edit3
+  Edit3,
+  Eye
 } from 'lucide-react';
 
 interface Product {
@@ -28,6 +29,7 @@ interface Product {
   image: string;
   category: string;
   in_stock: number;
+  is_hidden: number;
   featured: number;
   movement: string | null;
   case_material: string | null;
@@ -53,6 +55,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
   const [bcvRate, setBcvRate] = useState<number | null>(null);
   const [isEditingFull, setIsEditingFull] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('todos');
 
   // Fetch BCV rate
   useEffect(() => {
@@ -60,7 +63,8 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
       try {
         const response = await fetch('https://dolarapi.com/v1/dolares/oficial');
         const data = await response.json();
-        setBcvRate(data.promedio);
+        const rate = data.promedio || data.venta || data.precio || 0;
+        setBcvRate(rate);
       } catch (err) {
         console.error('Error fetching BCV rate:', err);
       }
@@ -71,7 +75,12 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/products');
+      const timestamp = Date.now();
+      const res = await fetch(`/api/products?include_hidden=true&t=${timestamp}`, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      });
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setProducts(data.products as Product[]);
@@ -96,6 +105,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
       numeric_compare_at_price: product.numeric_compare_at_price,
       discount_percent: product.discount_percent,
       in_stock: product.in_stock,
+      is_hidden: product.is_hidden,
     });
   };
 
@@ -191,32 +201,66 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
     }
   };
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleToggleVisibility = async (product: Product) => {
+    try {
+      await fetch('/api/admin/update-product', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id: product.id,
+          is_hidden: product.is_hidden ? 0 : 1,
+        }),
+      });
+      fetchProducts();
+    } catch {
+      setError('Error al actualizar visibilidad');
+    }
+  };
+
+  const categories = [
+    { id: 'todos', name: 'Todos' },
+    { id: 'elegantes', name: 'Elegantes' },
+    { id: 'automaticos', name: 'Automáticos' },
+    { id: 'deportivos', name: 'Deportivos' },
+    { id: 'dama', name: 'Damas' },
+    { id: 'mayoristas', name: 'Mayoristas' },
+  ];
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch = 
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesCategory = 
+      selectedCategory === 'todos' || product.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
 
   const inStockCount = products.filter(p => p.in_stock).length;
-  const outOfStockCount = products.length - inStockCount;
+  const visibleCount = products.filter(p => !p.is_hidden).length;
 
   return (
-    <div className="min-h-screen bg-[#090A0C]">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#0A0A0A]">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-[#090A0C] border-b border-[#2A2A2A] px-4 sm:px-6 py-4">
+      <header className="sticky top-0 z-10 bg-[#FFFFFF] border-b border-[#E5E7EB] px-4 sm:px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center">
-              <Package className="w-4 h-4 text-[#090A0C]" />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8B5A2B] to-[#6F441F] flex items-center justify-center">
+              <Package className="w-4 h-4 text-[#FFFFFF]" />
             </div>
-            <h1 className="font-serif text-lg font-bold text-[#FAFAFA]">
-              Admin <span className="font-light text-gray-400">/ Inventario</span>
+            <h1 className="font-serif text-lg font-bold text-[#0A0A0A]">
+              Admin <span className="font-light text-[#0A0A0A]">/ Inventario</span>
             </h1>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={fetchProducts}
-              className="p-2 rounded-lg text-gray-400 hover:text-[#D4AF37] hover:bg-[#1A1A1A] transition-colors cursor-pointer"
+              className="p-2 rounded-lg text-gray-600 hover:text-[#8B5A2B] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
               title="Refrescar"
             >
               <RefreshCw className="w-5 h-5" />
@@ -226,7 +270,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                 sessionStorage.removeItem('admin_token');
                 onLogout();
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-400/10 text-xs font-medium transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-600 hover:text-[#8B5A2B] hover:bg-[#FAFAFA] text-xs font-medium transition-colors cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden sm:inline">Salir</span>
@@ -238,50 +282,50 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-4">
+          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center">
-                <Package className="w-5 h-5 text-[#D4AF37]" />
+              <div className="w-10 h-10 rounded-lg bg-[#8B5A2B]/10 flex items-center justify-center">
+                <Package className="w-5 h-5 text-[#8B5A2B]" />
               </div>
               <div>
-                <p className="text-gray-400 text-xs uppercase font-mono">Total</p>
-                <p className="text-2xl font-bold text-[#FAFAFA]">{products.length}</p>
+                <p className="text-[#0A0A0A] text-xs uppercase font-mono">Total</p>
+                <p className="text-2xl font-bold text-[#0A0A0A]">{products.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-4">
+          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                 <Check className="w-5 h-5 text-emerald-500" />
               </div>
               <div>
-                <p className="text-gray-400 text-xs uppercase font-mono">En Stock</p>
-                <p className="text-2xl font-bold text-[#FAFAFA]">{inStockCount}</p>
+                <p className="text-[#0A0A0A] text-xs uppercase font-mono">En Stock</p>
+                <p className="text-2xl font-bold text-[#0A0A0A]">{inStockCount}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
-                <X className="w-5 h-5 text-red-500" />
-              </div>
-              <div>
-                <p className="text-gray-400 text-xs uppercase font-mono">Agotados</p>
-                <p className="text-2xl font-bold text-[#FAFAFA]">{outOfStockCount}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-4">
+          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-blue-500" />
+                <Eye className="w-5 h-5 text-blue-500" />
               </div>
               <div>
-                <p className="text-gray-400 text-xs uppercase font-mono">Tasa BCV</p>
-                <p className="text-xl font-bold text-[#FAFAFA]">
+                <p className="text-[#0A0A0A] text-xs uppercase font-mono">Visibles</p>
+                <p className="text-2xl font-bold text-[#0A0A0A]">{visibleCount}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl p-5 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                <DollarSign className="w-5 h-5 text-amber-500" />
+              </div>
+              <div>
+                <p className="text-[#0A0A0A] text-xs uppercase font-mono">Tasa BCV</p>
+                <p className="text-xl font-bold text-[#0A0A0A]">
                   {bcvRate ? `Bs. ${bcvRate.toFixed(2)}` : '...'}
                 </p>
               </div>
@@ -289,19 +333,35 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
           </div>
         </div>
 
-        {/* Search */}
-        <div className="mb-6">
-          <div className="relative max-w-md">
+        {/* Search and Filters */}
+        <div className="mb-6 flex flex-col sm:flex-row gap-4">
+          <div className="relative max-w-md flex-1">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar productos..."
-              className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-xl pl-10 pr-4 py-3 outline-none transition-colors"
+              className="w-full bg-[#FFFFFF] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-xl pl-10 pr-4 py-3 outline-none transition-colors"
             />
-            <svg className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-[#8B5A2B] absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
+          </div>
+          
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none flex-nowrap">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`whitespace-nowrap px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 ${
+                  selectedCategory === cat.id
+                    ? 'bg-gradient-to-r from-[#8B5A2B] to-[#6F441F] text-[#FAFAFA] font-bold shadow-[0_0_15px_rgba(139,90,43,0.3)]'
+                    : 'bg-[#FFFFFF] text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#8B5A2B]/50 hover:text-[#0A0A0A]'
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -314,44 +374,44 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <RefreshCw className="w-6 h-6 text-[#D4AF37] animate-spin" />
+            <RefreshCw className="w-6 h-6 text-[#8B5A2B] animate-spin" />
           </div>
         ) : (
           <div className="space-y-3">
-            <p className="text-gray-500 text-xs font-mono mb-4">
+            <p className="text-[#0A0A0A] text-xs font-mono mb-4">
               {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} mostrado{filteredProducts.length !== 1 ? 's' : ''}
             </p>
 
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden"
+                className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl overflow-hidden"
               >
                 {editingId === product.id && !isEditingFull ? (
                   // Quick Edit Mode
                   <div className="p-4 space-y-3">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] uppercase font-mono text-gray-500 block mb-1">Precio Oferta</label>
+                        <label className="text-[10px] uppercase font-mono text-[#0A0A0A] block mb-1">Precio Oferta</label>
                         <input
                           type="text"
                           value={editForm.price || ''}
                           onChange={(e) => handlePriceChange('price', e.target.value)}
-                          className="w-full bg-[#090A0C] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                          className="w-full bg-[#FFFFFF] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                         />
                         {bcvRate && editForm.numeric_price && (
-                          <p className="text-[10px] text-gray-500 mt-1">
+                          <p className="text-[10px] text-[#0A0A0A] mt-1">
                             ≈ Bs. {(editForm.numeric_price * bcvRate).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </p>
                         )}
                       </div>
                       <div>
-                        <label className="text-[10px] uppercase font-mono text-gray-500 block mb-1">Precio Regular</label>
+                        <label className="text-[10px] uppercase font-mono text-[#0A0A0A] block mb-1">Precio Regular</label>
                         <input
                           type="text"
                           value={editForm.compare_at_price || ''}
                           onChange={(e) => handlePriceChange('compare_at_price', e.target.value)}
-                          className="w-full bg-[#090A0C] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                          className="w-full bg-[#FFFFFF] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                         />
                         {editForm.discount_percent && editForm.discount_percent > 0 && (
                           <p className="text-[10px] text-emerald-500 mt-1">
@@ -363,14 +423,14 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => setEditingId(null)}
-                        className="px-4 py-2 rounded-lg border border-[#2A2A2A] text-gray-400 hover:text-[#FAFAFA] text-xs font-medium transition-colors cursor-pointer"
+                        className="px-4 py-2 rounded-lg border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#8B5A2B] text-xs font-medium transition-colors cursor-pointer"
                       >
                         Cancelar
                       </button>
                       <button
                         onClick={() => handleSave(product.id)}
                         disabled={saving}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:from-[#C9A02A] hover:to-[#A87609] disabled:opacity-50 text-[#090A0C] text-xs font-bold transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-[#8B5A2B] to-[#6F441F] hover:from-[#7A4A1B] hover:to-[#5E340F] disabled:opacity-50 text-[#FFFFFF] text-xs font-bold transition-colors cursor-pointer"
                       >
                         <Save className="w-4 h-4" />
                         <span>{saving ? 'Guardando...' : 'Guardar'}</span>
@@ -381,12 +441,12 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                   // Full Edit Mode (Drawer/Modal)
                   <div className="fixed inset-0 z-50 flex">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={handleCloseFullEdit}></div>
-                    <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[#090A0C] border-l border-[#2A2A2A] shadow-2xl flex flex-col animate-slideInRight">
-                      <div className="shrink-0 flex items-center justify-between px-5 py-4 border-b border-[#2A2A2A]">
-                        <h2 className="font-serif text-lg font-bold text-[#FAFAFA]">Editar Producto</h2>
+                    <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[#FFFFFF] border-l border-[#E5E7EB] shadow-2xl flex flex-col animate-slideInRight">
+                      <div className="shrink-0 flex items-center justify-between px-5 py-4 border-b border-[#E5E7EB]">
+                        <h2 className="font-serif text-lg font-bold text-[#0A0A0A]">Editar Producto</h2>
                         <button
                           onClick={handleCloseFullEdit}
-                          className="p-2 rounded-lg text-gray-500 hover:text-[#FAFAFA] hover:bg-[#1A1A1A] transition-colors cursor-pointer"
+                          className="p-2 rounded-lg text-gray-600 hover:text-[#8B5A2B] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
                         >
                           <X className="w-5 h-5" />
                         </button>
@@ -395,7 +455,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                       <div className="flex-1 overflow-y-auto p-5 space-y-6">
                         {/* Basic Info */}
                         <div>
-                          <h3 className="text-sm font-bold text-[#D4AF37] mb-3">Información Básica</h3>
+                          <h3 className="text-sm font-bold text-[#8B5A2B] mb-3">Información Básica</h3>
                           <div className="space-y-3">
                             <div>
                               <label className="text-[10px] uppercase font-mono text-gray-500 block mb-1">Nombre</label>
@@ -403,7 +463,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                 type="text"
                                 value={editForm.name || ''}
                                 onChange={(e) => setEditForm({...editForm, name: e.target.value})}
-                                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                               />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
@@ -413,7 +473,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.brand || ''}
                                   onChange={(e) => setEditForm({...editForm, brand: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                               <div>
@@ -422,7 +482,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.category || ''}
                                   onChange={(e) => setEditForm({...editForm, category: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                             </div>
@@ -432,7 +492,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                 type="text"
                                 value={editForm.tagline || ''}
                                 onChange={(e) => setEditForm({...editForm, tagline: e.target.value})}
-                                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                               />
                             </div>
                           </div>
@@ -440,7 +500,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                         
                         {/* Prices */}
                         <div>
-                          <h3 className="text-sm font-bold text-[#D4AF37] mb-3">Precios</h3>
+                          <h3 className="text-sm font-bold text-[#8B5A2B] mb-3">Precios</h3>
                           <div className="space-y-3">
                             <div className="grid grid-cols-2 gap-3">
                               <div>
@@ -449,7 +509,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.price || ''}
                                   onChange={(e) => handlePriceChange('price', e.target.value)}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                                 {bcvRate && editForm.numeric_price && (
                                   <p className="text-[10px] text-gray-500 mt-1">
@@ -463,7 +523,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.compare_at_price || ''}
                                   onChange={(e) => handlePriceChange('compare_at_price', e.target.value)}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                             </div>
@@ -479,7 +539,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                         
                         {/* Specs */}
                         <div>
-                          <h3 className="text-sm font-bold text-[#D4AF37] mb-3">Especificaciones</h3>
+                          <h3 className="text-sm font-bold text-[#8B5A2B] mb-3">Especificaciones</h3>
                           <div className="space-y-3">
                             <div className="grid grid-cols-2 gap-3">
                               <div>
@@ -488,7 +548,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.movement || ''}
                                   onChange={(e) => setEditForm({...editForm, movement: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                               <div>
@@ -497,7 +557,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.case_material || ''}
                                   onChange={(e) => setEditForm({...editForm, case_material: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                             </div>
@@ -508,7 +568,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.water_resistance || ''}
                                   onChange={(e) => setEditForm({...editForm, water_resistance: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                               <div>
@@ -517,7 +577,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                                   type="text"
                                   value={editForm.glass_type || ''}
                                   onChange={(e) => setEditForm({...editForm, glass_type: e.target.value})}
-                                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                                  className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                                 />
                               </div>
                             </div>
@@ -526,18 +586,18 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                         
                         {/* Badges */}
                         <div>
-                          <h3 className="text-sm font-bold text-[#D4AF37] mb-3">Badges</h3>
+                          <h3 className="text-sm font-bold text-[#8B5A2B] mb-3">Badges</h3>
                           <div className="space-y-2">
                             <input
                               type="text"
                               value={(editForm.badges || []).join(', ')}
                               onChange={(e) => setEditForm({...editForm, badges: e.target.value.split(',').map(b => b.trim()).filter(Boolean)})}
                               placeholder="Separados por coma: Más Vendido, Envío Gratis"
-                              className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#D4AF37] text-[#FAFAFA] text-sm rounded-lg px-3 py-2 outline-none"
+                              className="w-full bg-[#FAFAFA] border border-[#E5E7EB] focus:border-[#8B5A2B] text-[#0A0A0A] text-sm rounded-lg px-3 py-2 outline-none"
                             />
                             <div className="flex flex-wrap gap-2">
                               {(editForm.badges || []).map((badge, idx) => (
-                                <span key={idx} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/40">
+                                <span key={idx} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#8B5A2B]/20 text-[#8B5A2B] border border-[#8B5A2B]/40">
                                   {badge}
                                 </span>
                               ))}
@@ -546,17 +606,17 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
                         </div>
                       </div>
                       
-                      <div className="shrink-0 p-5 border-t border-[#2A2A2A] flex items-center justify-end gap-2">
+                      <div className="shrink-0 p-5 border-t border-[#E5E7EB] flex items-center justify-end gap-2">
                         <button
                           onClick={handleCloseFullEdit}
-                          className="px-4 py-2 rounded-lg border border-[#2A2A2A] text-gray-400 hover:text-[#FAFAFA] text-xs font-medium transition-colors cursor-pointer"
+                          className="px-4 py-2 rounded-lg border border-[#E5E7EB] text-gray-700 hover:text-[#0A0A0A] text-xs font-medium transition-colors cursor-pointer"
                         >
                           Cancelar
                         </button>
                         <button
                           onClick={() => handleSave(product.id)}
                           disabled={saving}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:from-[#C9A02A] hover:to-[#A87609] disabled:opacity-50 text-[#090A0C] text-xs font-bold transition-colors cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-[#8B5A2B] to-[#6F441F] hover:from-[#7A4A1B] hover:to-[#5E340F] disabled:opacity-50 text-[#FFFFFF] text-xs font-bold transition-colors cursor-pointer"
                         >
                           <Save className="w-4 h-4" />
                           <span>{saving ? 'Guardando...' : 'Guardar Cambios'}</span>
@@ -577,18 +637,18 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-sm font-semibold text-[#FAFAFA] truncate">
+                        <h3 className="text-sm font-semibold text-[#0A0A0A] truncate">
                           {product.name}
                         </h3>
                         {saveSuccess === product.id && (
                           <Check className="w-4 h-4 text-emerald-500 shrink-0" />
                         )}
                       </div>
-                      <p className="text-xs text-gray-500 truncate">{product.brand} • {product.category}</p>
+                      <p className="text-xs text-[#0A0A0A] truncate">{product.brand} • {product.category}</p>
                       <div className="flex items-baseline gap-2 mt-1">
-                        <p className="text-sm font-bold text-[#D4AF37]">{product.price}</p>
+                        <p className="text-sm font-bold text-[#8B5A2B]">{product.price}</p>
                         {product.compare_at_price && (
-                          <p className="text-xs text-gray-500 line-through">{product.compare_at_price}</p>
+                          <p className="text-xs text-[#0A0A0A] line-through">{product.compare_at_price}</p>
                         )}
                         {product.discount_percent && product.discount_percent > 0 && (
                           <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">
@@ -600,11 +660,22 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
 
                     <div className="flex items-center gap-2 shrink-0">
                       <button
+                        onClick={() => handleToggleVisibility(product)}
+className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+            !product.is_hidden
+              ? 'bg-[#8B5A2B]/20 text-[#8B5A2B] border border-[#8B5A2B]/40'
+              : 'bg-[#6F441F]/20 text-[#6F441F] border border-[#6F441F]/40'
+          }`}
+                      >
+                        {!product.is_hidden ? 'Visible en Tienda' : 'Oculto'}
+                      </button>
+
+                      <button
                         onClick={() => handleToggleStock(product)}
                         className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer ${
                           product.in_stock
-                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                            : 'bg-red-500/20 text-red-400 border border-red-500/40'
+                            ? 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/40'
+                            : 'bg-red-500/20 text-red-500 border border-red-500/40'
                         }`}
                       >
                         {product.in_stock ? 'En Stock' : 'Agotado'}
@@ -612,7 +683,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
 
                       <button
                         onClick={() => handleEdit(product)}
-                        className="p-2 rounded-lg text-gray-500 hover:text-[#D4AF37] hover:bg-[#1A1A1A] transition-colors cursor-pointer"
+                        className="p-2 rounded-lg text-gray-600 hover:text-[#8B5A2B] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
                         title="Editar Precios"
                       >
                         <Tag className="w-4 h-4" />
@@ -620,7 +691,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
 
                       <button
                         onClick={() => handleEditFull(product)}
-                        className="p-2 rounded-lg text-gray-500 hover:text-[#D4AF37] hover:bg-[#1A1A1A] transition-colors cursor-pointer"
+                        className="p-2 rounded-lg text-gray-600 hover:text-[#8B5A2B] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
                         title="Editar Ficha Completa"
                       >
                         <Edit3 className="w-4 h-4" />
