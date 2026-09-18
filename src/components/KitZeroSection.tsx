@@ -27,10 +27,10 @@ export const KitZeroSection = () => {
             <span>Unboxing de Alta Gama</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0A] tracking-tight mb-4">
-            La Experiencia <span className="brand-gradient-text italic font-serif">Kit Zero</span>
+            La Experiencia <span className="brand-gradient-text italic font-serif">TEMPO</span>
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            Otras tiendas te entregan un reloj en una bolsa plástica sin protección. En Zero For Men, cada pedido incluye un set integral de herramientas y empaque para que disfrutes de tu pieza desde el primer minuto.
+            Otras tiendas te entregan un reloj en una bolsa plástica sin protección. En TEMPO, cada pedido incluye un set integral de herramientas y empaque para que disfrutes de tu pieza desde el primer minuto.
           </p>
         </div>
 
@@ -128,19 +128,19 @@ export const KitZeroSection = () => {
                 </div>
                 <div className="p-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB]">
                   <span className="block text-base font-bold text-[#8B5A2B]">Garantía</span>
-                  <span className="text-[11px] text-gray-600">Oficial Zero</span>
+                  <span className="text-[11px] text-gray-600">Oficial TEMPO</span>
                 </div>
               </div>
 
               {/* Action Button */}
               <div className="mt-6 text-center">
                 <a
-                  href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quisiera%20pedir%20un%20reloj%20con%20el%20Kit%20Zero%20completo"
+                  href="https://wa.me/584141934573?text=Hola%20TEMPO,%20quisiera%20pedir%20un%20reloj%20con%20el%20Kit%20de%20Bienvenida%20completo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#8B5A2B] hover:bg-[#6F441F] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all shadow-md"
                 >
-                  <span>Pedir Reloj con Kit Zero Incluido</span>
+                  <span>Pedir Reloj con Kit de Bienvenida</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

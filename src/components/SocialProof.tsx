@@ -1,6 +1,36 @@
-import { MapPin, Truck, Heart } from 'lucide-react';
+import { Truck, PackageCheck, Gift, ShieldCheck } from 'lucide-react';
 
 export const SocialProof = () => {
+  const features = [
+    {
+      icon: PackageCheck,
+      color: 'text-emerald-600',
+      bgColor: 'bg-emerald-50',
+      borderColor: 'border-emerald-200',
+      title: 'Despachos Diarios Protegidos',
+      description: 'Cada pedido se prepara con triple protección y precinto de seguridad. Número de guía MRW, Zoom o Tealca enviado al instante para rastreo en tiempo real.',
+      badge: 'MRW • Zoom • Tealca',
+    },
+    {
+      icon: Gift,
+      color: 'text-rose-600',
+      bgColor: 'bg-rose-50',
+      borderColor: 'border-rose-200',
+      title: 'Cómplices de Fechas Especiales',
+      description: 'Coordinamos entregas sorpresa en cualquier rincón de Venezuela. Regalos de aniversario, cumpleaños o logros con notas personalizadas y empaque premium.',
+      badge: 'Regalos Especiales',
+    },
+    {
+      icon: ShieldCheck,
+      color: 'text-cyan-600',
+      bgColor: 'bg-cyan-50',
+      borderColor: 'border-cyan-200',
+      title: 'Garantía Real & Soporte',
+      description: 'Inspección técnica previa a cada envío. Garantía contra defectos de fábrica y soporte post-venta directo por WhatsApp para cualquier consulta.',
+      badge: 'Inspección + Garantía',
+    },
+  ];
+
   return (
     <section id="testimonios" className="py-24 bg-[#FAFAFA] border-t border-[#E5E7EB] relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -12,85 +42,36 @@ export const SocialProof = () => {
             <span>Confianza & Cumplimiento</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0A] tracking-tight mb-4">
-            Despachos Diarios & <span className="brand-gradient-text italic font-serif">Historias Reales</span>
+            Compromiso Real & <span className="brand-gradient-text italic font-serif">Entregas Seguras</span>
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            De Lechería para toda Venezuela. Cumplimos cada promesa de entrega embalando con triple protección para que recibas tu reloj en impecable estado.
+            De Venezuela para toda Venezuela. Cumplimos cada promesa de entrega con embalaje de grado logístico para que recibas tu reloj en impecable estado.
           </p>
         </div>
 
-        {/* Real Visual Proof Collage */}
+        {/* Feature Cards with Icons */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Card 1: MRW Dispatch Photo */}
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
-            <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
-              <img
-                src="/assets/feed/07_nibosi_aquanaut_lujo.jpg"
-                alt="Despachos de pedidos en agencia MRW Nueva Barcelona para toda Venezuela"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-emerald-600 border border-emerald-500/40 font-semibold">
-                MRW • Zoom • Tealca
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group hover:shadow-2xl transition-all duration-500"
+            >
+              <div className={`p-8 h-64 flex flex-col items-center justify-center ${feature.bgColor} ${feature.borderColor} border-t-0 relative`}>
+                <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono font-semibold ${feature.color} border ${feature.borderColor}`}>
+                  {feature.badge}
+                </div>
+                <feature.icon className={`w-16 h-16 ${feature.color} mb-4 group-hover:scale-110 transition-transform duration-500`} />
+              </div>
+              <div className="p-6">
+                <h4 className="font-serif text-base font-bold text-[#0A0A0A] mb-2">
+                  {feature.title}
+                </h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             </div>
-            <div className="p-5">
-              <h4 className="font-serif text-base font-bold text-[#0A0A0A] mb-1">
-                Despachos Diarios Protegidos
-              </h4>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Fotografía real en agencia MRW Nueva Barcelona. Cada paquete viaja con precinto de seguridad, empaque reforzado y número de guía enviado al instante.
-              </p>
-            </div>
-          </div>
-
-          {/* Card 2: Surprise Flower Detail in Apure */}
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
-            <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
-              <img
-                src="/assets/feed/04_detalle_ramo_poedagar930.jpg"
-                alt="Detalle especial para cliente en Apure con reloj Poedagar 930 y flores"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-rose-500 border border-rose-500/40 flex items-center gap-1 font-semibold">
-                <Heart className="w-3 h-3 fill-current" /> Historia en Apure
-              </div>
-            </div>
-            <div className="p-5">
-              <h4 className="font-serif text-base font-bold text-[#0A0A0A] mb-1">
-                Cómplices de Fechas Especiales
-              </h4>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Coordinamos entregas sorpresa en cualquier rincón del país. Desde arreglos con relojes de colección hasta regalos de aniversario con notas personalizadas.
-              </p>
-            </div>
-          </div>
-
-          {/* Card 3: Personal Hand Delivery in Lechería */}
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xl group">
-            <div className="relative h-64 overflow-hidden bg-[#FAFAFA]">
-              <img
-                src="/assets/feed/10_pagani_design_1706_gmt.jpg"
-                alt="Entrega personal de relojes en Lechería y zona norte de Anzoátegui"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FAFAFA]/90 text-[10px] font-mono text-cyan-600 border border-cyan-500/40 flex items-center gap-1 font-semibold">
-                <MapPin className="w-3 h-3" /> Entregas en Lechería
-              </div>
-            </div>
-            <div className="p-5">
-              <h4 className="font-serif text-base font-bold text-[#0A0A0A] mb-1">
-                Entregas Personales Hoy Mismo
-              </h4>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Si te encuentras en Lechería, Barcelona o Puerto La Cruz, coordinamos tu entrega en puntos seguros como Plaza Mayor, Centro Lido o Nueva Barcelona.
-              </p>
-            </div>
-          </div>
-
+          ))}
         </div>
 
       </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MessageCircle, Menu, X, MapPin, Truck, Sparkles, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { WatchLogo } from './WatchLogo';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,8 +18,8 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: 'Colección', href: '#catalogo' },
-    { name: 'Kit Zero', href: '#kit-zero' },
-    { name: 'Ventas al Mayor', href: '#mayoristas' },
+    { name: 'Experiencia', href: '#kit-zero' },
+    { name: 'Mayoristas', href: '#mayoristas' },
     { name: 'Envíos & Entregas', href: '#testimonios' },
     { name: 'Historia', href: '#fundadores' },
     { name: 'FAQ', href: '#faq' },
@@ -36,7 +37,7 @@ export const Navbar = () => {
             </span>
             <span className="text-gray-400">•</span>
             <span className="inline-flex items-center gap-1 text-emerald-600 truncate">
-              <MapPin className="w-3 h-3 shrink-0" /> Entregas en Lechería
+              <MapPin className="w-3 h-3 shrink-0" /> Envíos a Toda Venezuela
             </span>
           </div>
 
@@ -49,11 +50,11 @@ export const Navbar = () => {
           </div>
           <div className="hidden sm:flex items-center gap-3 text-[11px]">
             <span className="inline-flex items-center gap-1 text-emerald-600 font-medium">
-              <MapPin className="w-3.5 h-3.5" /> Entregas hoy en Lechería, Barcelona & PLC
+              <MapPin className="w-3.5 h-3.5" /> Envíos asegurados a toda Venezuela
             </span>
             <span className="text-gray-300">|</span>
             <span className="inline-flex items-center gap-1 text-[#8B5A2B] font-medium">
-              <Sparkles className="w-3 h-3" /> Kit Zero incluido
+              <Sparkles className="w-3 h-3" /> Kit de Bienvenida Incluido
             </span>
           </div>
         </div>
@@ -71,18 +72,14 @@ export const Navbar = () => {
           {/* Brand Logo & Name */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
             <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-[#8B5A2B]/60 group-hover:border-[#8B5A2B] transition-all shadow-sm group-hover:shadow-[0_0_15px_rgba(139,90,43,0.3)] shrink-0">
-              <img
-                src="/assets/linktree_avatar.jpeg"
-                alt="Logo Zero For Men"
-                className="w-full h-full object-cover"
-              />
+              <WatchLogo size={24} className="w-full h-full text-[#8B5A2B]" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-base sm:text-xl font-bold tracking-tight text-[#0A0A0A] leading-none group-hover:text-[#8B5A2B] transition-colors">
-                ZERO <span className="font-light text-gray-700">FOR MEN</span>
+                TEMPO
               </span>
               <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-[#8B5A2B] font-mono mt-0.5 sm:mt-1">
-                Horology & Presence
+                Relojería & Presencia
               </span>
             </div>
           </a>
@@ -115,7 +112,7 @@ export const Navbar = () => {
               )}
             </button>
             <a
-              href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quisiera%20consultar%20el%20cat%C3%A1logo%20disponible"
+              href="https://wa.me/584141934573?text=Hola%20TEMPO,%20quisiera%20consultar%20el%20cat%C3%A1logo%20disponible"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] hover:from-[#6F441F] hover:to-[#4A2E1B] text-[#FAFAFA] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:scale-[1.02]"
@@ -166,7 +163,7 @@ export const Navbar = () => {
               ))}
               <div className="pt-4 pb-2">
                 <a
-                  href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quisiera%20consultar%20el%20cat%C3%A1logo%20disponible"
+                  href="https://wa.me/584141934573?text=Hola%20TEMPO,%20quisiera%20consultar%20el%20cat%C3%A1logo%20disponible"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}

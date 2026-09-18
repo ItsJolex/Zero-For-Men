@@ -50,7 +50,7 @@ interface AdminDashboardProps {
   onLogout: () => void;
 }
 
-const BRANDS = ['Poedagar', 'Curren', 'Nibosi', 'Pagani Design', 'Casio', 'Pablo Raez', 'Zero For Men', 'Zero Mayoristas'];
+const BRANDS = ['Poedagar', 'Curren', 'Nibosi', 'Pagani Design', 'Casio', 'Pablo Raez', 'TEMPO Mayoristas'];
 
 const CATEGORIES = [
   { id: 'todos', name: 'Todos' },
@@ -427,7 +427,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
             </div>
             <div>
               <h1 className="font-serif text-lg font-bold text-[#0A0A0A]">
-                Zero For Men <span className="font-light text-gray-500">/ Suite Admin</span>
+                TEMPO <span className="font-light text-gray-500">/ Suite Admin</span>
               </h1>
             </div>
           </div>
@@ -907,7 +907,7 @@ export const AdminDashboard = ({ token, onLogout }: AdminDashboardProps) => {
         {loading ? (
           <div className="p-12 text-center text-gray-500">
             <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2 text-[#8B5A2B]" />
-            <p className="font-serif">Cargando inventario de Zero For Men...</p>
+            <p className="font-serif">Cargando inventario de TEMPO...</p>
           </div>
         ) : filteredProducts.length === 0 ? (
           <div className="p-12 text-center text-gray-500 bg-white rounded-2xl border border-gray-200">

@@ -13,10 +13,10 @@ export const Hero = () => {
           
           {/* Left Column: Copy & CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left">
-            {/* Pill Badge */}
+{/* Pill Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFFFF] border border-[#8B5A2B]/40 text-[#8B5A2B] text-xs font-mono tracking-widest uppercase mb-6 shadow-sm">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Relojería Masculina • Lechería &amp; Envíos a Toda Venezuela</span>
+              <span>Relojería Masculina • Envíos Asegurados a Toda Venezuela</span>
             </div>
 
             {/* Main Headline */}
@@ -27,7 +27,7 @@ export const Hero = () => {
 
             {/* Subheading */}
             <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal mb-8">
-              Boutique especializada en relojes de hombre en Venezuela. Acabados premium, maquinaria de precisión y modelos en acero inoxidable (Poedagar, Nibosi, Pablo Raez y más). Cada pieza incluye el exclusivo <strong className="text-[#8B5A2B] font-semibold">Kit Zero de Regalo</strong>, entregas personales en Lechería y envíos rápidos a todo el país.
+              Boutique especializada en relojes de hombre en Venezuela. Acabados premium, maquinaria de precisión y modelos en acero inoxidable (Poedagar, Nibosi, Pablo Raez y más). Cada pieza incluye el exclusivo <strong className="text-[#8B5A2B] font-semibold">Kit de Bienvenida</strong> y envíos asegurados a toda Venezuela.
             </p>
 
             {/* Action Buttons */}
@@ -41,7 +41,7 @@ export const Hero = () => {
               </a>
 
               <a
-                href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20quiero%20conocer%20la%20disponibilidad%20de%20los%20relojes%20y%20m%C3%A9todos%20de%20pago"
+                href="https://wa.me/584141934573?text=Hola%20TEMPO,%20quiero%20conocer%20la%20disponibilidad%20de%20los%20relojes%20y%20m%C3%A9todos%20de%20pago"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#FFFFFF] hover:bg-gray-100 text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#8B5A2B]/50 font-semibold text-sm px-7 py-4 rounded-xl transition-all duration-300"
@@ -58,7 +58,7 @@ export const Hero = () => {
                   <Award className="w-4 h-4" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">Kit Zero Gratis</div>
+                  <div className="text-xs sm:text-sm font-semibold text-[#0A0A0A]">Kit de Bienvenida</div>
                   <div className="text-[11px] sm:text-xs text-gray-600">Estuche + Ajustador</div>
                 </div>
               </div>
@@ -97,6 +97,8 @@ export const Hero = () => {
                   <img
                     src="/assets/catalog/poedagar-930-verde.webp"
                     alt="Poedagar 930 Verde Esmeralda en Venezuela"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-85" />
@@ -131,7 +133,7 @@ export const Hero = () => {
                         <CheckCircle2 className="w-3 h-3 text-[#8B5A2B]" /> Acero Inoxidable
                       </span>
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FAFAFA] border border-[#E5E7EB]">
-                        <CheckCircle2 className="w-3 h-3 text-[#8B5A2B]" /> Kit Zero Incluido
+                        <CheckCircle2 className="w-3 h-3 text-[#8B5A2B]" /> Kit de Bienvenida
                       </span>
                     </div>
                   </div>

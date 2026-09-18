@@ -7,15 +7,15 @@ export const WhatsAppFloating = () => {
   const quickPrompts = [
     {
       label: '💼 Catálogo al Mayor (desde 3 unidades)',
-      text: 'Hola Zero For Men, solicito el catálogo y lista de precios al mayor para revendedores'
+      text: 'Hola TEMPO, solicito el catálogo y lista de precios al mayor para revendedores'
     },
     {
       label: '⌚ Consultar disponibilidad de un modelo',
-      text: 'Hola Zero For Men, deseo consultar disponibilidad y precio de un reloj'
+      text: 'Hola TEMPO, deseo consultar disponibilidad y precio de un reloj'
     },
     {
-      label: '📍 Entregas personales en Lechería',
-      text: 'Hola Zero For Men, me gustaría coordinar una entrega personal en Lechería / Barcelona'
+      label: '📍 Envíos a toda Venezuela',
+      text: 'Hola TEMPO, me gustaría coordinar un envío a mi ciudad'
     }
   ];
 
@@ -36,14 +36,14 @@ export const WhatsAppFloating = () => {
               <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#8B5A2B]">
                 <img
                   src="/assets/linktree_avatar.jpeg"
-                  alt="Asesor Zero For Men"
+                  alt="Asesor TEMPO"
                   className="w-full h-full object-cover"
                 />
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-black" />
               </div>
               <div>
                 <span className="font-serif text-sm font-bold text-[#0A0A0A] block">
-                  Zero For Men
+                  TEMPO
                 </span>
                 <span className="text-[10px] text-emerald-600 font-mono flex items-center gap-1 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -64,7 +64,7 @@ export const WhatsAppFloating = () => {
           {/* Body */}
           <div className="p-4 space-y-3 bg-[#FAFAFA]/50">
             <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#E5E7EB] text-xs text-gray-700 leading-relaxed">
-              👋 ¡Hola! Bienvenido a Zero For Men. ¿En qué podemos ayudarte hoy? Selecciona una opción o escribe directo a nuestro WhatsApp:
+              👋 ¡Hola! Bienvenido a TEMPO. ¿En qué podemos ayudarte hoy? Selecciona una opción o escribe directo a nuestro WhatsApp:
             </div>
 
             <div className="space-y-2">
@@ -84,7 +84,7 @@ export const WhatsAppFloating = () => {
           {/* Footer Direct Action */}
           <div className="p-3 bg-[#FAFAFA] border-t border-[#E5E7EB] text-center">
             <button
-              onClick={() => handleSend('Hola Zero For Men, deseo más información')}
+              onClick={() => handleSend('Hola TEMPO, deseo más información')}
               className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-xl transition-all shadow-md cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-current" />

@@ -70,12 +70,12 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
     const originalDesc = metaDesc ? metaDesc.getAttribute('content') : '';
 
     // Update document title for SEO & browser tabs
-    document.title = `${product.name} - ${product.price} | Zero For Men Venezuela`;
+    document.title = `${product.name} - ${product.price} | TEMPO Venezuela`;
 
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        `${product.name} (${product.brand}) en Zero For Men Venezuela. ${product.tagline} Precio: ${product.price}. Incluye Kit Zero y envíos a todo el país.`
+        `${product.name} (${product.brand}) en TEMPO Venezuela. ${product.tagline} Precio: ${product.price}. Incluye Kit de Bienvenida y envíos a todo el país.`
       );
     }
 
@@ -94,7 +94,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: product.name,
-      image: product.image.startsWith('http') ? product.image : `https://zeroformen.com${product.image}`,
+      image: product.image.startsWith('http') ? product.image : `https://tempo-demo.com${product.image}`,
       description: `${product.tagline} ${product.description}`,
       brand: {
         '@type': 'Brand',
@@ -105,10 +105,10 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
         price: numericPrice || '35',
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
-        url: `https://zeroformen.com/${product.slug}`,
+        url: `https://tempo-demo.com/${product.slug}`,
         seller: {
           '@type': 'Organization',
-          name: 'Zero For Men'
+          name: 'TEMPO'
         }
       }
     });
@@ -130,7 +130,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   const currentUrl =
     typeof window !== 'undefined'
       ? `${window.location.origin}/${product.slug}`
-      : `https://zeroformen.com/${product.slug}`;
+      : `https://tempo-demo.com/${product.slug}`;
 
   const handleCopyLink = async () => {
     try {
@@ -151,7 +151,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hola Zero For Men, deseo consultar disponibilidad del modelo ${product.name} (${currentUrl})`
+    `Hola TEMPO, deseo consultar disponibilidad del modelo ${product.name} (${currentUrl})`
   );
   const whatsappUrl = `https://wa.me/584141934573?text=${whatsappMessage}`;
 
@@ -273,7 +273,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
               <div className="p-3.5 rounded-xl bg-[#FAFAFA] border border-[#8B5A2B]/30 flex items-center gap-3">
                 <Sparkles className="w-5 h-5 text-[#8B5A2B] shrink-0" />
                 <div className="text-xs text-gray-700">
-                  <span className="font-semibold text-[#8B5A2B]">Kit Zero Incluido:</span> Estuche
+                  <span className="font-semibold text-[#8B5A2B]">Kit de Bienvenida Incluido:</span> Estuche
                   rígido, pañuelo de microfibra, ajustador de eslabones y batería de repuesto.
                 </div>
               </div>
@@ -339,7 +339,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
         {/* Footer Actions - Fixed at bottom of modal */}
         <div className="shrink-0 p-4 sm:px-6 border-t border-[#E5E7EB] bg-[#FAFAFA] flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-xs text-gray-600 text-center sm:text-left">
-            Envíos vía MRW / Zoom / Tealca o entregas hoy en Lechería.
+            Envíos vía MRW / Zoom / Tealca a toda Venezuela.
           </div>
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
             <button

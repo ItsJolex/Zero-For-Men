@@ -10,7 +10,13 @@ function getDb() {
 
 function verifyAuth(req: VercelRequest): boolean {
   const authHeader = req.headers.authorization;
-  return Boolean(authHeader && authHeader.startsWith('Bearer '));
+  if (!authHeader || !authHeader.startsWith('Bearer ')) return false;
+
+  const token = authHeader.replace('Bearer ', '').trim();
+  const adminSecret = process.env.ADMIN_SECRET_KEY;
+  if (!adminSecret || !token) return false;
+
+  return token === adminSecret;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

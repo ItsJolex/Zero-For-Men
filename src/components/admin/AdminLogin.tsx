@@ -47,7 +47,7 @@ export const AdminLogin = ({ onLogin }: AdminLoginProps) => {
             <Lock className="w-7 h-7 text-[#8B5A2B]" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#0A0A0A] mb-1">Panel Admin</h1>
-          <p className="text-[#0A0A0A]/70 text-sm">Zero For Men</p>
+          <p className="text-[#0A0A0A]/70 text-sm">TEMPO</p>
         </div>
 
         <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">

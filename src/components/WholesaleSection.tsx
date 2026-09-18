@@ -38,7 +38,7 @@ export const WholesaleSection = () => {
             <span>Oportunidad de Negocio B2B</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A0A0A] tracking-tight mb-4">
-            Emprende con Zero: <span className="brand-gradient-text italic font-serif">Ventas al Mayor</span>
+            Emprende con TEMPO: <span className="brand-gradient-text italic font-serif">Ventas al Mayor</span>
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
             La relojería de alta gama es uno de los rubros con mayor margen comercial en Venezuela. Únete a nuestra red de revendedores autorizados en Caracas, Valencia, Maracaibo, Barquisimeto y el Oriente del país.
@@ -113,7 +113,7 @@ export const WholesaleSection = () => {
 
             <div className="lg:col-span-4 text-center lg:text-right">
               <a
-                href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20solicito%20el%20cat%C3%A1logo%20y%20lista%20de%20precios%20al%20mayor%20para%20revendedores"
+                href="https://wa.me/584141934573?text=Hola%20TEMPO,%20solicito%20el%20cat%C3%A1logo%20y%20lista%20de%20precios%20al%20mayor%20para%20revendedores"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#8B5A2B] via-[#9E6735] to-[#704214] hover:from-[#704214] hover:to-[#5C4033] text-[#FAFAFA] font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-[#8B5A2B]/25 hover:shadow-xl hover:scale-105 w-full sm:w-auto"

@@ -1,5 +1,4 @@
 import { Heart, MessageCircle } from 'lucide-react';
-import { InstagramIcon } from './InstagramIcon';
 
 export const FoundersStory = () => {
   return (
@@ -20,7 +19,9 @@ export const FoundersStory = () => {
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#FAFAFA]">
                   <img
                     src="/assets/feed/11_curren_8445_cronografo.jpg"
-                    alt="Inspección técnica de relojería en taller Zero For Men"
+                    alt="Inspección técnica de relojería en taller TEMPO"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent opacity-80" />
@@ -34,7 +35,7 @@ export const FoundersStory = () => {
                       Inspección Técnica Pieza por Pieza
                     </div>
                     <div className="text-xs text-gray-600 mt-1">
-                      Relojería de precisión con sello y garantía Zero en Anzoátegui 🇻🇪
+                      Relojería de precisión con sello y garantía TEMPO 🇻🇪
                     </div>
                   </div>
                 </div>
@@ -55,7 +56,7 @@ export const FoundersStory = () => {
 
             <div className="space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
               <p>
-                Zero For Men nació de una necesidad clara: en Venezuela resultaba sumamente difícil encontrar relojería de estatus y presencia que equilibrara <strong className="text-[#0A0A0A]">ingeniería de precisión, materiales nobles y un precio justo</strong>, sin descuidar la experiencia del cliente.
+                TEMPO nació de una necesidad clara: en Venezuela resultaba sumamente difícil encontrar relojería de estatus y presencia que equilibrara <strong className="text-[#0A0A0A]">ingeniería de precisión, materiales nobles y un precio justo</strong>, sin descuidar la experiencia del cliente.
               </p>
 
               <p>
@@ -63,28 +64,28 @@ export const FoundersStory = () => {
               </p>
 
               <p>
-                Diseñamos la <strong className="text-[#8B5A2B]">Experiencia Kit Zero</strong>: cada pieza que sale de nuestro taller en Anzoátegui va protegida en estuche rígido, probada en hermeticidad, con ajustador de eslabones y tarjeta de garantía por defectos de fábrica.
+                Diseñamos la <strong className="text-[#8B5A2B]">Experiencia TEMPO</strong>: cada pieza que sale de nuestro taller va protegida en estuche rígido, probada en hermeticidad, con ajustador de eslabones y tarjeta de garantía por defectos de fábrica.
               </p>
 
               <p className="text-gray-600 text-sm">
-                Hoy no solo vestimos muñecas con elegancia en Lechería, Caracas, Valencia o San Cristóbal; también impulsamos a decenas de jóvenes y familias a emprender su propio negocio con ventas al mayor.
+                Hoy no solo vestimos muñecas con elegancia en Caracas, Valencia o San Cristóbal; también impulsamos a decenas de jóvenes y familias a emprender su propio negocio con ventas al mayor.
               </p>
             </div>
 
             {/* Founders Social Connect */}
             <div className="mt-8 pt-6 border-t border-[#E5E7EB] flex flex-wrap items-center gap-4">
               <a
-                href="https://instagram.com/zerooformen"
+                href="https://instagram.com/tempo.ve"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#8B5A2B] text-xs font-semibold text-gray-700 hover:text-[#0A0A0A] transition-all shadow-sm"
               >
-                <InstagramIcon className="w-4 h-4 text-[#8B5A2B]" />
-                <span>@zerooformen (Instagram)</span>
+                <MessageCircle className="w-4 h-4 text-[#8B5A2B]" />
+                <span>@tempo.ve (Instagram)</span>
               </a>
 
               <a
-                href="https://wa.me/584141934573?text=Hola%20Zero%20For%20Men,%20me%20encant%C3%B3%20su%20propuesta%20en%20la%20tienda%20web"
+                href="https://wa.me/584141934573?text=Hola%20TEMPO,%20me%20encant%C3%B3%20su%20propuesta%20en%20la%20tienda%20web"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#8B5A2B] to-[#5C4033] text-[#FAFAFA] text-xs font-bold uppercase tracking-wider transition-all hover:scale-105 shadow-sm"

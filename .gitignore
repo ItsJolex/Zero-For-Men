@@ -13,6 +13,14 @@ dist-ssr
 dist-api
 *.local
 
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Database schema
+schema.sql
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

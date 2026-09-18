@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  brand: 'Pagani Design' | 'Poedagar' | 'Curren' | 'Nibosi' | 'Casio' | 'Pablo Raez' | 'Zero Mayoristas' | 'Zero For Men';
+  brand: 'Pagani Design' | 'Poedagar' | 'Curren' | 'Nibosi' | 'Casio' | 'Pablo Raez' | 'TEMPO Mayoristas';
   tagline: string;
   description: string;
   image: string;
@@ -328,20 +328,20 @@ export const FAQS = [
     answer: 'Sí, despachamos a toda Venezuela a través de MRW (¡Envío GRATIS en la mayoría de los modelos!). Los envíos a ciudades como Caracas, Valencia, Maracaibo, Barquisimeto y Puerto Ordaz tardan entre 24 y 48 horas hábiles.'
   },
   {
-    question: '¿Dónde realizan entregas personales?',
-    answer: 'Realizamos entregas personales inmediatas en Lechería, Puerto La Cruz y Barcelona (estado Anzoátegui).'
+    question: '¿Dónde realizan entregas?',
+    answer: 'Realizamos envíos asegurados a toda Venezuela (MRW, Zoom, Tealca) con entrega en 24-48h. Coordinamos puntos de entrega seguros en ciudades principales.'
   },
   {
-    question: '¿Qué incluye la compra de mi reloj con el Kit Zero?',
+    question: '¿Qué incluye la compra de mi reloj con el Kit de Bienvenida?',
     answer: 'Todos nuestros relojes incluyen su caja o estuche original de colección, paño de microfibra antiestático, garantía contra defectos y, en modelos de correa de acero, la herramienta ajustadora de eslabones.'
   },
   {
     question: '¿Cómo comprar relojes para hombre originales en Venezuela de forma segura?',
-    answer: 'En Zero For Men garantizamos piezas 100% funcionales y revisadas. Antes de cada despacho te enviamos fotos y videos de tu reloj probado por WhatsApp con tu guía de rastreo MRW.'
+    answer: 'En TEMPO garantizamos piezas 100% funcionales y revisadas. Antes de cada despacho te enviamos fotos y videos de tu reloj probado por WhatsApp con tu guía de rastreo MRW.'
   },
   {
     question: '¿Cómo comprar relojes al mayor para emprender en Venezuela?',
-    answer: 'Contamos con planes mayoristas desde 5 unidades con márgenes de ganancia del 50% al 80%. Te entregamos catálogo con precios especiales, material publicitario para tus estados/redes y asesoría de modelos con mayor rotación.'
+    answer: 'Contamos con planes mayoristas desde 3 unidades con márgenes de ganancia del 40% al 60%. Te entregamos catálogo con precios especiales, material publicitario para tus estados/redes y asesoría de modelos con mayor rotación.'
   }
 ];
 
